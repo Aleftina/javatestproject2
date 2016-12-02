@@ -27,7 +27,10 @@ public class GroupCreationTests {
 
     @Test
     public void testGroupCreation() {
-        createNewGroup();
+        clickGroupLink();
+        initGroupCreation();
+        fillNewGroupParameters();
+        submitNewGroup();
         goGroupPageLink();
     }
 
@@ -47,9 +50,13 @@ public class GroupCreationTests {
     public void goGroupPageLink(){
         wd.findElement(By.linkText("group page")).click();
     }
-    public void createNewGroup(){
-        wd.findElement(By.linkText("groups")).click();
-        wd.findElement(By.name("new")).click();
+
+
+    public void submitNewGroup() {
+        wd.findElement(By.name("submit")).click();
+    }
+
+    public void fillNewGroupParameters() {
         wd.findElement(By.name("group_name")).click();
         wd.findElement(By.name("group_name")).clear();
         wd.findElement(By.name("group_name")).sendKeys("group 2");
@@ -62,7 +69,14 @@ public class GroupCreationTests {
         wd.findElement(By.name("group_footer")).click();
         wd.findElement(By.name("group_footer")).clear();
         wd.findElement(By.name("group_footer")).sendKeys("footer\n");
-        wd.findElement(By.name("submit")).click();
+    }
+
+    public void initGroupCreation() {
+        wd.findElement(By.name("new")).click();
+    }
+
+    public void clickGroupLink() {
+        wd.findElement(By.linkText("groups")).click();
     }
 
     @AfterMethod
