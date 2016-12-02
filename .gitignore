@@ -1,6 +1,7 @@
 .gradle
 build/
 .idea/workspace.xml
+.idea/libraries
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -13,3 +14,45 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+.idea/libraries/Gradle__cglib_cglib_nodep_2_1_3.xml
+.idea/libraries/Gradle__com_google_code_gson_gson_2_3_1.xml
+.idea/libraries/Gradle__com_google_guava_guava_19_0.xml
+.idea/libraries/Gradle__commons_codec_commons_codec_1_10.xml
+.idea/libraries/Gradle__commons_collections_commons_collections_3_2_2.xml
+.idea/libraries/Gradle__commons_io_commons_io_2_4.xml
+.idea/libraries/Gradle__commons_logging_commons_logging_1_2.xml
+.idea/libraries/Gradle__io_netty_netty_3_5_7_Final.xml
+.idea/libraries/Gradle__net_java_dev_jna_jna_4_1_0.xml
+.idea/libraries/Gradle__net_java_dev_jna_jna_platform_4_1_0.xml
+.idea/libraries/Gradle__net_sourceforge_cssparser_cssparser_0_9_18.xml
+.idea/libraries/Gradle__net_sourceforge_htmlunit_htmlunit_2_21.xml
+.idea/libraries/Gradle__net_sourceforge_htmlunit_htmlunit_core_js_2_17.xml
+.idea/libraries/Gradle__net_sourceforge_htmlunit_neko_htmlunit_2_21.xml
+.idea/libraries/Gradle__org_apache_commons_commons_exec_1_3.xml
+.idea/libraries/Gradle__org_apache_commons_commons_lang3_3_4.xml
+.idea/libraries/Gradle__org_apache_httpcomponents_httpclient_4_5_2.xml
+.idea/libraries/Gradle__org_apache_httpcomponents_httpcore_4_4_4.xml
+.idea/libraries/Gradle__org_apache_httpcomponents_httpmime_4_5_2.xml
+.idea/libraries/Gradle__org_eclipse_jetty_jetty_io_9_2_15_v20160210.xml
+.idea/libraries/Gradle__org_eclipse_jetty_jetty_util_9_2_15_v20160210.xml
+.idea/libraries/Gradle__org_eclipse_jetty_websocket_websocket_api_9_2_15_v20160210.xml
+.idea/libraries/Gradle__org_eclipse_jetty_websocket_websocket_client_9_2_15_v20160210.xml
+.idea/libraries/Gradle__org_eclipse_jetty_websocket_websocket_common_9_2_15_v20160210.xml
+.idea/libraries/Gradle__org_seleniumhq_selenium_htmlunit_driver_2_21.xml
+.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_api_2_53_1.xml
+.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_chrome_driver_2_53_1.xml
+.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_edge_driver_2_53_1.xml
+.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_firefox_driver_2_53_1.xml
+.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_ie_driver_2_53_1.xml
+.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_java_2_53_1.xml
+.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_leg_rc_2_53_1.xml
+.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_remote_driver_2_53_1.xml
+.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_safari_driver_2_53_1.xml
+.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_support_2_53_1.xml
+.idea/libraries/Gradle__org_w3c_css_sac_1_3.xml
+.idea/libraries/Gradle__xalan_serializer_2_7_2.xml
+.idea/libraries/Gradle__xalan_xalan_2_7_2.xml
+.idea/libraries/Gradle__xerces_xercesImpl_2_11_0.xml
+.idea/libraries/Gradle__xml_apis_xml_apis_1_4_01.xml
+adressbook-web-tests/src/main/
+adressbook-web-tests/src/test/resources/
