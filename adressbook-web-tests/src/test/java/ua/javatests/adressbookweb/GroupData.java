@@ -1,11 +1,25 @@
 package ua.javatests.adressbookweb;
 
-/**
- * Сгруппировать параметры метода заполнения формы в объект,
- * сделать вспомогательный "модельный" класс GroupData для представления таких объектов.
- */
 public class GroupData {
-    public String groupName = "group name";
-    public String header = "header";
-    public String footer = "footer";
+    private final String groupName;
+    private final String header;
+    private final String footer;
+
+    public GroupData(String groupName, String header, String footer) {
+        this.groupName = groupName;
+        this.header = header;
+        this.footer = footer;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public String getFooter() {
+        return footer;
+    }
 }
