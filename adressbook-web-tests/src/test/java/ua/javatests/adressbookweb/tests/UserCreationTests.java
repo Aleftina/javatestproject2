@@ -1,6 +1,7 @@
-package ua.javatests.adressbookweb;
+package ua.javatests.adressbookweb.tests;
 
 import org.testng.annotations.Test;
+import ua.javatests.adressbookweb.model.UserData;
 
 public class UserCreationTests extends BaseTest{
 

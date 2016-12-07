@@ -1,7 +1,8 @@
-package ua.javatests.adressbookweb;
+package ua.javatests.adressbookweb.tests;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import ua.javatests.adressbookweb.appmanager.ApplicationManager;
 
 public class BaseTest {
 

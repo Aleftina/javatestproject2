@@ -1,4 +1,4 @@
-package ua.javatests.adressbookweb;
+package ua.javatests.adressbookweb.model;
 
 public class UserData {
     private final String firstName;

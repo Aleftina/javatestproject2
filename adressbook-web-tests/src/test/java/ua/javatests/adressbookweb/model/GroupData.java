@@ -1,4 +1,4 @@
-package ua.javatests.adressbookweb;
+package ua.javatests.adressbookweb.model;
 
 public class GroupData {
     private final String groupName;

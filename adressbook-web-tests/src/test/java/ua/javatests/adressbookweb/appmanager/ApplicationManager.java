@@ -1,8 +1,10 @@
-package ua.javatests.adressbookweb;
+package ua.javatests.adressbookweb.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import ua.javatests.adressbookweb.model.GroupData;
+import ua.javatests.adressbookweb.model.UserData;
 
 import java.util.concurrent.TimeUnit;
 

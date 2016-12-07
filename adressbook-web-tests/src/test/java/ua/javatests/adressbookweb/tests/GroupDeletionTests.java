@@ -1,4 +1,4 @@
-package ua.javatests.adressbookweb;
+package ua.javatests.adressbookweb.tests;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
