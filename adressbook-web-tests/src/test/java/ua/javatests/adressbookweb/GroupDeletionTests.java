@@ -7,11 +7,11 @@ public class GroupDeletionTests extends BaseTest{
 
     @Test
     public void testGroupDeletion() {
-        if (!wd.findElement(By.name("selected[]")).isSelected()) {
-            wd.findElement(By.name("selected[]")).click();
+        if (!applic.wd.findElement(By.name("selected[]")).isSelected()) {
+            applic.wd.findElement(By.name("selected[]")).click();
         }
-        wd.findElement(By.name("delete")).click();
-        goGroupPageLink();
+        applic.wd.findElement(By.name("delete")).click();
+        applic.goGroupPageLink();
     }
 
 }

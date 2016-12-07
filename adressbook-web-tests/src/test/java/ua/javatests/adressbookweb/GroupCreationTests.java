@@ -6,10 +6,10 @@ public class GroupCreationTests extends BaseTest {
 
     @Test
     public void testGroupCreation() {
-        clickGroupLink();
-        initGroupCreation();
-        fillNewGroupParameters(new GroupData("group 1", "header", "footer"));
-        submitNewGroup();
-        goGroupPageLink();
+        applic.clickGroupLink();
+        applic.initGroupCreation();
+        applic.fillNewGroupParameters(new GroupData("group 1", "header", "footer"));
+        applic.submitNewGroup();
+        applic.goGroupPageLink();
     }
 }
