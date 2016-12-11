@@ -17,5 +17,4 @@ public class BaseTest {
     public void setUp() throws Exception {
         applic.init();
     }
-
 }
