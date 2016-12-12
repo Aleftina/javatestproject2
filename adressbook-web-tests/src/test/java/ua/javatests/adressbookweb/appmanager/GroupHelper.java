@@ -25,10 +25,14 @@ public class GroupHelper extends BaseHelper{
         click(By.name("new"));
     }
 
-    public void deleteSelectedGroup() {
+    public void deleteFirstGroupInList() {
+        selectFirstGroupInList();
+        click(By.name("delete"));
+    }
+
+    public void selectFirstGroupInList() {
         if (!wd.findElement(By.name("selected[]")).isSelected()) {
             click(By.name("selected[]"));
         }
-        click(By.name("delete"));
     }
 }

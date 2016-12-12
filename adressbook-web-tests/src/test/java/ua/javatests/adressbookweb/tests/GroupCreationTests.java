@@ -11,6 +11,6 @@ public class GroupCreationTests extends BaseTest {
         applic.getGroupHelper().initGroupCreation();
         applic.getGroupHelper().fillNewGroupParameters(new GroupData("group 1", "header", "footer"));
         applic.getGroupHelper().submitNewGroup();
-        applic.getNavigationHelper().groupPageLink();
+        applic.getNavigationHelper().returnGroupPageLink();
     }
 }
