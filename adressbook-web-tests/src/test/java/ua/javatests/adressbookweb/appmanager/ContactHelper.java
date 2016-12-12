@@ -1,25 +1,24 @@
 package ua.javatests.adressbookweb.appmanager;
 
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ua.javatests.adressbookweb.model.UserData;
 
-public class ContactHelper {
-
-    private FirefoxDriver wd;
+public class ContactHelper extends BaseHelper {
 
     public ContactHelper(FirefoxDriver wd){
-        this.wd = wd;
+        super(wd);
     }
 
     public void fillUserParameters(UserData userData) {
-        wd.findElementByName("firstname").sendKeys(userData.getFirstName());
-        wd.findElementByName("lastname").sendKeys(userData.getLastName());
-        wd.findElementByName("mobile").sendKeys(userData.getMobile());
-        wd.findElementByName("email").sendKeys(userData.getEmail());
+        type(By.name("firstname"), userData.getFirstName());
+        type(By.name("lastname"), userData.getLastName());
+        type(By.name("mobile"),userData.getMobile());
+        type(By.name("email"),userData.getEmail());
     }
 
     public void submitNewUser() {
-        wd.findElementByName("submit").click();
+        click(By.name("submit"));
     }
 }

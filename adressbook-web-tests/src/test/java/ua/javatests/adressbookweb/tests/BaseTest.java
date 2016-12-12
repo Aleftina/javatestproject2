@@ -10,7 +10,7 @@ public class BaseTest {
 
     @AfterMethod
     public void tearDown() {
-        applic.stop();
+        applic.stopDriver();
     }
 
     @BeforeMethod
