@@ -28,23 +28,19 @@ public class ContactHelper extends BaseHelper {
 
     public void submitUserDelete() {
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
-        alertAcceptDelete();
     }
 
     public void alertAcceptDelete() {
-        try {
-            WebDriverWait wait = new WebDriverWait(wd, 2);
-            wait.until(ExpectedConditions.alertIsPresent());
-            Alert alert = wd.switchTo().alert();
-            alert.accept();
-        } catch (Exception e) {
-            //exception handling
+        Alert a = new WebDriverWait(wd, 2).until(ExpectedConditions.alertIsPresent());
+        if (a != null) {
+            System.out.println("alert is present");
+            wd.switchTo().alert().accept();
         }
     }
 
     public void selectUserById(String id) {
         if (!wd.findElement(By.id(id)).isSelected()) {
-          click(By.id(id));
+            click(By.id(id));
         }
     }
 
