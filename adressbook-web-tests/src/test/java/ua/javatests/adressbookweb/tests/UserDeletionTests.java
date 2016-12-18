@@ -10,7 +10,7 @@ public class UserDeletionTests extends BaseTest {
     public void testUserDelete() {
         //delete user by id
         applic.getNavigationHelper().homePageLink();
-        applic.getContactHelper().selectUserById("41");
+        applic.getContactHelper().selectUserById("63");
         applic.getContactHelper().submitUserDelete();
         applic.getContactHelper().alertAcceptDelete();
         applic.getNavigationHelper().homePageLink();

@@ -5,7 +5,6 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ua.javatests.adressbookweb.model.UserData;
@@ -33,20 +32,14 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void alertAcceptDelete() {
-        Alert a = new WebDriverWait(wd, 20).until(ExpectedConditions.alertIsPresent());
-        if (a != null) {
-            System.out.println("alert is present");
-            wd.switchTo().alert().accept();
+        try {
+            WebDriverWait wait = new WebDriverWait(wd, 2);
+            wait.until(ExpectedConditions.alertIsPresent());
+            Alert alert = wd.switchTo().alert();
+            alert.accept();
+        } catch (Exception e) {
+            //exception handling
         }
-//          else {
-//            try {
-//                throw new Throwable();
-//            } catch (Throwable throwable) {
-//                throwable.printStackTrace();
-//            }
-//        }
-//        {
-
     }
 
     public void selectUserById(String id) {
