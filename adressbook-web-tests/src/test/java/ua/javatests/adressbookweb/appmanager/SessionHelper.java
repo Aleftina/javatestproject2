@@ -2,12 +2,13 @@ package ua.javatests.adressbookweb.appmanager;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class SessionHelper extends BaseHelper {
     //private FirefoxDriver wd;
 
-    public SessionHelper(FirefoxDriver wd) {
+    public SessionHelper(WebDriver wd) {
         super(wd);
     }
 

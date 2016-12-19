@@ -2,13 +2,12 @@ package ua.javatests.adressbookweb.appmanager;
 
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriver;
 
 public class NavigationHelper extends BaseHelper {
 
-//    private FirefoxDriver wd;
 
-    public NavigationHelper(FirefoxDriver wd) {
+    public NavigationHelper(WebDriver wd) {
         super(wd);
     }
 
@@ -19,8 +18,11 @@ public class NavigationHelper extends BaseHelper {
     public void groupsLink() {
         wd.findElement(By.linkText("groups")).click();
     }
+    //public void homePageLink() {
+//        wd.findElementByLinkText("home").click();
+//    }
     public void homePageLink() {
-        wd.findElementByLinkText("home").click();
+        wd.findElement(By.linkText("home")).click();
     }
 
     public void addNewUserLink() {
