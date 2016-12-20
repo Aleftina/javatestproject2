@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
- Создать для этих вспомогательных классов общий базовый класс BaseHelper, перенести в него низкоуровневые
- вспмогательные методы (заполнение отдельного поля, нажатие на кнопку или ссылку).
+ * Создать для этих вспомогательных классов общий базовый класс BaseHelper, перенести в него низкоуровневые
+ * вспмогательные методы (заполнение отдельного поля, нажатие на кнопку или ссылку).
  */
 public class BaseHelper {
 
@@ -23,9 +23,15 @@ public class BaseHelper {
 
     public void type(By locator, String text) {
         click(locator);
-        wd.findElement(locator).clear();
-        wd.findElement(locator).sendKeys(text);
+        if (text != null) {
+            String oldText = wd.findElement(locator).getAttribute("value");
+            if (!(oldText.equals(text))) {
+                wd.findElement(locator).clear();
+                wd.findElement(locator).sendKeys(text);
+            }
+        }
     }
+
 
     public boolean isAlertPresent() {
         try {

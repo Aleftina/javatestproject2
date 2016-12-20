@@ -9,7 +9,7 @@ public class GroupCreationTests extends BaseTest {
     public void testGroupCreation() {
         applic.getNavigationHelper().groupsLink();
         applic.getGroupHelper().initGroupCreation();
-        applic.getGroupHelper().fillNewGroupParameters(new GroupData("group 1", "header", "footer"));
+        applic.getGroupHelper().fillNewGroupParameters(new GroupData("group 1", null, null));
         applic.getGroupHelper().submitNewGroup();
         applic.getNavigationHelper().returnGroupPageLink();
     }

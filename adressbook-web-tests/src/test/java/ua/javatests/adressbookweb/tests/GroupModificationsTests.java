@@ -11,7 +11,7 @@ public class GroupModificationsTests extends BaseTest{
         applic.getNavigationHelper().groupsLink();
         applic.getGroupHelper().selectFirstGroupInList();
         applic.getGroupHelper().initGroupModification();
-        applic.getGroupHelper().fillNewGroupParameters(new GroupData("new group name", "new header", "new footer"));
+        applic.getGroupHelper().fillNewGroupParameters(new GroupData("group 1", "new header", "new footer"));
         applic.getGroupHelper().submitGroupModification();
         applic.getNavigationHelper().returnGroupPageLink();
 }
