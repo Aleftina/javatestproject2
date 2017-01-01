@@ -1,14 +1,7 @@
 package ua.javatests.adressbookweb.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.*;
 
-/**
- * Создать для этих вспомогательных классов общий базовый класс BaseHelper, перенести в него низкоуровневые
- * вспмогательные методы (заполнение отдельного поля, нажатие на кнопку или ссылку).
- */
 public class BaseHelper {
 
     protected WebDriver wd;
@@ -32,7 +25,6 @@ public class BaseHelper {
         }
     }
 
-
     public boolean isAlertPresent() {
         try {
             wd.switchTo().alert();
@@ -41,4 +33,15 @@ public class BaseHelper {
             return false;
         }
     }
+
+    protected boolean isElementPresent(By locator) {
+    try {
+        wd.findElement(locator);
+        return true;
+    }
+    catch (NoSuchElementException e){
+        return false;
+    }
+    }
+
 }

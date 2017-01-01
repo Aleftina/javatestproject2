@@ -5,13 +5,15 @@ public class UserData {
     private final String lastName;
     private final String mobile;
     private final String email;
+    private final String group;
 
-    public UserData(String firstName, String lastName, String mobile, String email) {
+    public UserData(String firstName, String lastName, String mobile, String email, String group) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.mobile = mobile;
         this.email = email;
 
+        this.group = group;
     }
 
     public String getFirstName() {
@@ -28,5 +30,9 @@ public class UserData {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getGroup() {
+        return group;
     }
 }

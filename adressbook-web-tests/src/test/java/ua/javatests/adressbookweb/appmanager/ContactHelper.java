@@ -5,9 +5,10 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import ua.javatests.adressbookweb.model.UserData;
 
 public class ContactHelper extends BaseHelper {
@@ -16,15 +17,14 @@ public class ContactHelper extends BaseHelper {
         super(wd);
     }
 
-    public void fillUserParameters(UserData userData) {
+    public void fillUserParameters(UserData userData, Boolean creation) {
         type(By.name("firstname"), userData.getFirstName());
         type(By.name("lastname"), userData.getLastName());
         type(By.name("mobile"), userData.getMobile());
         type(By.name("email"), userData.getEmail());
-    }
-
-    public void submitNewUser() {
-        click(By.name("submit"));
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(userData.getGroup());
+        } else Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
 
     public void submitUserDelete() {
@@ -40,19 +40,25 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void selectUserById(String id) {
-        if (!wd.findElement(By.id(id)).isSelected()) {
-            click(By.id(id));
+        if (isElementPresent(By.id(id))) {
+            if (!wd.findElement(By.id(id)).isSelected()) {
+                click(By.id(id));
+            }
+        } else {
+            System.out.println("No element with id = " + id);
         }
     }
 
-    public void editFirstUserInListIfNotAdmin() {
-        if (checkFirstItemIsAdminUser() == false) {
-            getEditUserElement(2).click();
-        } else getEditUserElement(3).click();
+    public void selectUser(int i) {
+        i++;
+        WebElement d = wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr["+i+"]/td[1]"));
+        if (!d.isSelected()) {
+            d.click();
+        }
     }
 
-    public WebElement getEditUserElement(final int i) {
-        return wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + i + "]/td[8]/a/img"));
+    public void editUser(int i) {
+        wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + i+1 + "]/td[8]/a/img")).click();
     }
 
     public boolean checkFirstItemIsAdminUser() {
@@ -63,9 +69,32 @@ public class ContactHelper extends BaseHelper {
         else return false;
     }
 
-    public void submitUserUpdate() {
-        wd.findElement(By.name("update")).click();
+    public Boolean userListIsEmpty() {
+        //if (! isElementPresent(By.name("#maintable tr[2]"))) {
+        if (! isElementPresent(By.xpath(".//*[@id='maintable']/tbody/tr[2]"))) {
+         return true;
+        }
+        else {return false;}
     }
+
+    public void submitNewUser() {
+        click(By.name("submit"));
+    }
+
+    public void submitUserUpdate() {
+        click(By.name("update"));
+    }
+
+    public void selectAll() {
+        if (isElementPresent(By.id("MassCB"))) {
+            if (!wd.findElement(By.id("MassCB")).isSelected()) {
+                click(By.id("MassCB"));
+            }
+            System.out.println("select all already selected");
+        }
+    }
+
+
 }
 
 

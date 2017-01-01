@@ -8,7 +8,7 @@ public class UserCreationTests extends BaseTest {
     @Test
     public void testUserCreation() {
         applic.getNavigationHelper().addNewUserLink();
-        applic.getContactHelper().fillUserParameters(new UserData("Oleg", "Petrov", "123254485", "asda@sadfsdl.ghj"));
+        applic.getContactHelper().fillUserParameters(new UserData("Oleg", "Petrov", "123254485", "asda@sadfsdl.ghj","group for empty list"), true);
         applic.getContactHelper().submitNewUser();
         applic.getNavigationHelper().homePageLink();
     }

@@ -18,9 +18,7 @@ public class NavigationHelper extends BaseHelper {
     public void groupsLink() {
         wd.findElement(By.linkText("groups")).click();
     }
-    //public void homePageLink() {
-//        wd.findElementByLinkText("home").click();
-//    }
+
     public void homePageLink() {
         wd.findElement(By.linkText("home")).click();
     }
@@ -29,4 +27,7 @@ public class NavigationHelper extends BaseHelper {
         wd.findElement(By.linkText("add new")).click();
     }
 
+    public void returnHomePage() {
+        wd.findElement(By.linkText("home page")).click();
+    }
 }

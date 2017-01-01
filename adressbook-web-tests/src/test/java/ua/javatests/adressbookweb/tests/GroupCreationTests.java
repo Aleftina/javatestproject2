@@ -9,8 +9,16 @@ public class GroupCreationTests extends BaseTest {
     public void testGroupCreation() {
         applic.getNavigationHelper().groupsLink();
         applic.getGroupHelper().initGroupCreation();
-        applic.getGroupHelper().fillNewGroupParameters(new GroupData("group 1", null, null));
+        applic.getGroupHelper().fillNewGroupParameters(new GroupData("group 2", null, null));
         applic.getGroupHelper().submitNewGroup();
         applic.getNavigationHelper().returnGroupPageLink();
     }
+
+    @Test
+    public void loopGroupCreation() {
+        for (int i = 0; i<9 ;i++){
+            testGroupCreation();
+        }
+    }
+
 }
