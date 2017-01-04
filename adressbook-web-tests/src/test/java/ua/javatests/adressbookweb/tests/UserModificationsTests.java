@@ -13,6 +13,7 @@ public class UserModificationsTests extends BaseTest{
         createUserIfListIsEmpty();
         int usersBefore = applic.getContactHelper().usersCounter();
 
+        applic.getContactHelper().selectUser(1);
         applic.getContactHelper().editUser(1);
         applic.getContactHelper().fillUserParameters(new UserData("Oleg modified","Petrov modified","0987654321","zxcv@klkl.opop", null), false);
         applic.getContactHelper().submitUserUpdate();

@@ -2,12 +2,15 @@ package ua.javatests.adressbookweb.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import ua.javatests.adressbookweb.model.GroupData;
 
+import java.util.List;
 
-public class GroupHelper extends BaseHelper{
+
+public class GroupHelper extends BaseHelper {
 
     public GroupHelper(WebDriver wd) {
         super(wd);
@@ -27,33 +30,32 @@ public class GroupHelper extends BaseHelper{
         click(By.name("new"));
     }
 
-    public void deleteFirstGroupInList() {
-        selectFirstGroupInList();
-        click(By.name("delete"));
+    public void submitDeleteGroup() {
+        wd.findElement(By.name("delete")).click();
     }
 
     public void prepareGroupListIfEmpty(GroupData groupData) {
-        if (checkGroupsListNotEmpty() == false) {
+        if (groupsListNotEmpty() == false) {
             initGroupCreation();
             fillNewGroupParameters(groupData);
             submitNewGroup();
         }
     }
 
-    public void selectFirstGroupInList() {
-        if (checkGroupsListNotEmpty() == true) {
-            if (!wd.findElement(By.name("selected[]")).isSelected()) {
-                click(By.name("selected[]"));
-            }
-            else {
+    public void selectGroup(int index) {
+        if (groupsListNotEmpty() == true) {
+            List<WebElement> groupsList = wd.findElements(By.name("selected[]"));
+
+            if (!groupsList.get(index).isSelected()) {
+                groupsList.get(index).click();
+            } else {
                 Assert.assertTrue(wd.findElement(By.name("selected[]")).isSelected());
                 System.out.println("group is already selected");
             }
         }
-        System.out.println("Groups list is empty");
     }
 
-    public Boolean checkGroupsListNotEmpty() {
+    public Boolean groupsListNotEmpty() {
         if (!isElementPresent(By.name("selected[]"))) {
             return false;
         }

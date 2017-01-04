@@ -12,11 +12,13 @@ public class GroupModificationsTests extends BaseTest{
         applic.getNavigationHelper().groupsLink();
         int beforeGroups = applic.getGroupHelper().getGroupsCounter();
         applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group for modification", "header", "footer"));
-        applic.getGroupHelper().selectFirstGroupInList();
+
+        applic.getGroupHelper().selectGroup(1);
         applic.getGroupHelper().initGroupModification();
         applic.getGroupHelper().fillNewGroupParameters(new GroupData("group modified", "header modified", "footer modified"));
         applic.getGroupHelper().submitGroupModification();
         applic.getNavigationHelper().returnGroupPageLink();
+
         int afterGroups = applic.getGroupHelper().getGroupsCounter();
         Assert.assertEquals(beforeGroups, afterGroups);
 }

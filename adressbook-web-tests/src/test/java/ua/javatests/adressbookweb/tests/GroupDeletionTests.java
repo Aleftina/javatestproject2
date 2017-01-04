@@ -8,11 +8,12 @@ public class GroupDeletionTests extends BaseTest{
 
     @Test
     public void testGroupDeletion() {
+        applic.getNavigationHelper().groupsLink();
         applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group for empty list", "header", "footer"));
         int beforeGroups = applic.getGroupHelper().getGroupsCounter();
 
-        applic.getGroupHelper().selectFirstGroupInList();
-        applic.getGroupHelper().deleteFirstGroupInList();
+        applic.getGroupHelper().selectGroup(0);
+        applic.getGroupHelper().submitDeleteGroup();
         applic.getNavigationHelper().returnGroupPageLink();
 
         int afterGroups = applic.getGroupHelper().getGroupsCounter();

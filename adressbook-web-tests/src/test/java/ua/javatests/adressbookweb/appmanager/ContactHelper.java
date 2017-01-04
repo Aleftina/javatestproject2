@@ -31,24 +31,6 @@ public class ContactHelper extends BaseHelper {
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     }
 
-    public void alertAcceptDelete() {
-        Alert a = new WebDriverWait(wd, 2).until(ExpectedConditions.alertIsPresent());
-        if (a != null) {
-            System.out.println("alert is present");
-            wd.switchTo().alert().accept();
-        }
-    }
-
-    public void selectUserById(String id) {
-        if (isElementPresent(By.id(id))) {
-            if (!wd.findElement(By.id(id)).isSelected()) {
-                click(By.id(id));
-            }
-        } else {
-            System.out.println("No element with id = " + id);
-        }
-    }
-
     public void selectUser(int i) {
         i++;
         WebElement d = wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr["+i+"]/td[1]"));
@@ -58,7 +40,8 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void editUser(int i) {
-        wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + i+1 + "]/td[8]/a/img")).click();
+        i++;
+        wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + i + "]/td[8]/a/img")).click();
     }
 
     public boolean checkFirstItemIsAdminUser() {
@@ -70,7 +53,6 @@ public class ContactHelper extends BaseHelper {
     }
 
     public Boolean userListIsEmpty() {
-        //if (! isElementPresent(By.name("#maintable tr[2]"))) {
         if (! isElementPresent(By.xpath(".//*[@id='maintable']/tbody/tr[2]"))) {
          return true;
         }
@@ -94,10 +76,15 @@ public class ContactHelper extends BaseHelper {
         }
     }
 
+    public void alertAcceptDelete() {
+        Alert a = new WebDriverWait(wd, 2).until(ExpectedConditions.alertIsPresent());
+        if (a != null) {
+            System.out.println("alert is present");
+            wd.switchTo().alert().accept();
+        }
+    }
 
     public int usersCounter() {
         return wd.findElements(By.name("selected[]")).size();
     }
 }
-
-

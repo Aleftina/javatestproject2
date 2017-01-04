@@ -10,19 +10,16 @@ public class UserDeletionTests extends BaseTest {
     @Test
     public void testUserDelete() {
         applic.getNavigationHelper().homePageLink();
-        //create user if empty list
         createUserIfListIsEmpty();
         int usersBefore = applic.getContactHelper().usersCounter();
-        System.out.println("Users before" + usersBefore);
-        //user delete test
-        applic.getNavigationHelper().homePageLink();
+
         applic.getContactHelper().selectUser(1);
         applic.getContactHelper().submitUserDelete();
         applic.getContactHelper().alertAcceptDelete();
         applic.getNavigationHelper().homePageLink();
+
         int usersAfter = applic.getContactHelper().usersCounter();
-        System.out.println("Users after" + usersAfter);
-        Assert.assertEquals(usersAfter, usersBefore + 1);
+        Assert.assertEquals(usersAfter+1, usersBefore);
     }
 
     @Test

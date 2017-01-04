@@ -1,6 +1,9 @@
 package ua.javatests.adressbookweb.appmanager;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 
 public class BaseHelper {
 
@@ -43,5 +46,4 @@ public class BaseHelper {
         return false;
     }
     }
-
 }
