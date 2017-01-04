@@ -25,7 +25,7 @@ public class ApplicationManager {
 
     public void init() {
         startDriver();
-        openURL("http://localhost/addressbook/group.php");
+        openURL("http://localhost/addressbook/");
 
         contactHelper = new ContactHelper(wd);
         sessionHelper = new SessionHelper(wd);

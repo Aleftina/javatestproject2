@@ -67,4 +67,8 @@ public class GroupHelper extends BaseHelper{
     public void submitGroupModification() {
         click(By.name("update"));
     }
+
+    public int getGroupsCounter() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }
