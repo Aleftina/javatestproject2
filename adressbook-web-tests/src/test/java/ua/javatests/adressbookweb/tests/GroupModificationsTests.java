@@ -4,14 +4,16 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.GroupData;
 
+import java.util.List;
+
 
 public class GroupModificationsTests extends BaseTest{
 
     @Test
     public void testsGroupModification(){
         applic.getNavigationHelper().groupsLink();
-        int beforeGroups = applic.getGroupHelper().getGroupsCounter();
         applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group for modification", "header", "footer"));
+        List<GroupData> groupsBefore = applic.getGroupHelper().getGroupList();
 
         applic.getGroupHelper().selectGroup(1);
         applic.getGroupHelper().initGroupModification();
@@ -19,7 +21,7 @@ public class GroupModificationsTests extends BaseTest{
         applic.getGroupHelper().submitGroupModification();
         applic.getNavigationHelper().returnGroupPageLink();
 
-        int afterGroups = applic.getGroupHelper().getGroupsCounter();
-        Assert.assertEquals(beforeGroups, afterGroups);
+        List<GroupData> groupsAfter = applic.getGroupHelper().getGroupList();
+        Assert.assertEquals(groupsBefore.size(), groupsAfter.size());
 }
 }

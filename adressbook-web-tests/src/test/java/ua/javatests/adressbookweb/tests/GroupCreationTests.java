@@ -4,20 +4,22 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.GroupData;
 
+import java.util.List;
+
 public class GroupCreationTests extends BaseTest {
 
     @Test
     public void testGroupCreation() {
         applic.getNavigationHelper().groupsLink();
-        int groupsBefore = applic.getGroupHelper().getGroupsCounter();
+        List<GroupData> groupsBefore = applic.getGroupHelper().getGroupList();
 
         applic.getGroupHelper().initGroupCreation();
-        applic.getGroupHelper().fillNewGroupParameters(new GroupData("group 2", null, null));
+        applic.getGroupHelper().fillNewGroupParameters(new GroupData("group 3", null, null));
         applic.getGroupHelper().submitNewGroup();
         applic.getNavigationHelper().returnGroupPageLink();
 
-        int groupsAfter = applic.getGroupHelper().getGroupsCounter();
-        Assert.assertEquals(groupsAfter, groupsBefore + 1);
+        List<GroupData> groupsAfter = applic.getGroupHelper().getGroupList();
+        Assert.assertEquals(groupsAfter.size(), groupsBefore.size() + 1);
     }
 
     @Test

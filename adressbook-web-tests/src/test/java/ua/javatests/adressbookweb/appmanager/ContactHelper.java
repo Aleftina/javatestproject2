@@ -11,6 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ua.javatests.adressbookweb.model.UserData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ContactHelper extends BaseHelper {
 
     public ContactHelper(WebDriver wd) {
@@ -42,14 +45,6 @@ public class ContactHelper extends BaseHelper {
     public void editUser(int i) {
         i++;
         wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + i + "]/td[8]/a/img")).click();
-    }
-
-    public boolean checkFirstItemIsAdminUser() {
-        String s = wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[2]/td[3]")).getText();
-        System.out.println("s=" + s);
-        if (s.equals("admin"))
-            return true;
-        else return false;
     }
 
     public Boolean userListIsEmpty() {
@@ -86,5 +81,16 @@ public class ContactHelper extends BaseHelper {
 
     public int usersCounter() {
         return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<UserData> getUsersList() {
+        List<UserData> usersList = new ArrayList<>();
+        List<WebElement> elements = wd.findElements(By.name("selected[]"));
+        for (WebElement element: elements) {
+            String name = element.getText();
+            UserData user = new UserData(name, null, null, null, null);
+            usersList.add(user);
+        }
+        return usersList;
     }
 }
