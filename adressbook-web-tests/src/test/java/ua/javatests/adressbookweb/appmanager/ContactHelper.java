@@ -125,6 +125,9 @@ public class ContactHelper extends BaseHelper {
         wd.findElement(By.linkText("home page")).click();
     }
 
+    public int getUsersCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }
 
 

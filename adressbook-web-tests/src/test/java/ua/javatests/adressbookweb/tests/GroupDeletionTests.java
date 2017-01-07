@@ -1,5 +1,6 @@
 package ua.javatests.adressbookweb.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.GroupData;
 
@@ -9,6 +10,12 @@ public class GroupDeletionTests extends BaseTest {
     public void testGroupDeletion() {
         applic.getNavigationHelper().groupsLink();
         applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group 1", "header", "footer"));
+        int sizeBefore = applic.getGroupHelper().getGroupsCount();
+
         applic.getGroupHelper().deleteFirstGroupInList();
+
+        int sizeAfter = applic.getGroupHelper().getGroupsCount();
+        Assert.assertEquals(sizeBefore, sizeAfter+1);
+
     }
 }

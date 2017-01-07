@@ -83,4 +83,8 @@ public class GroupHelper extends BaseHelper{
     public void returnGroupPageLink() {
         click(By.linkText("group page"));
     }
+
+    public int getGroupsCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }
