@@ -2,6 +2,7 @@ package ua.javatests.adressbookweb.tests;
 
 
 import org.testng.annotations.Test;
+import ua.javatests.adressbookweb.model.UserData;
 
 
 public class UserDeletionTests extends BaseTest {
@@ -9,13 +10,8 @@ public class UserDeletionTests extends BaseTest {
     @Test
     public void testUserDelete() {
         applic.getNavigationHelper().homePageLink();
-        //create user if empty list
-        createUserIfListIsEmpty();
-        //user delete test
-        applic.getNavigationHelper().homePageLink();
-        applic.getContactHelper().selectUser(1);
-        applic.getContactHelper().submitUserDelete();
-        applic.getContactHelper().alertAcceptDelete();
+        applic.getContactHelper().prepareUserListIfEmpty(new UserData("first name", "second name", "97654321", "asd@dfg", "group 1"));
+        applic.getContactHelper().deleteUser(1);
         applic.getNavigationHelper().homePageLink();
     }
 

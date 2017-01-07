@@ -58,15 +58,21 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void editUser(int i) {
-        wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + i+1 + "]/td[8]/a/img")).click();
+        i++;
+        wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + i + "]/td[8]/a/img")).click();
     }
 
-    public boolean checkFirstItemIsAdminUser() {
-        String s = wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[2]/td[3]")).getText();
-        System.out.println("s=" + s);
-        if (s.equals("admin"))
-            return true;
-        else return false;
+    public void deleteUser(int i) {
+        selectUser(i);
+        submitUserDelete();
+        alertAcceptDelete();
+    }
+
+    public void modifyUser(int i, UserData userData){
+        selectUser(i);
+        editUser(i);
+        fillUserParameters(userData, false);
+        submitUserUpdate();
     }
 
     public Boolean userListIsEmpty() {
@@ -85,6 +91,10 @@ public class ContactHelper extends BaseHelper {
         click(By.name("update"));
     }
 
+    public void addNewUserLink() {
+        wd.findElement(By.linkText("add new")).click();
+    }
+
     public void selectAll() {
         if (isElementPresent(By.id("MassCB"))) {
             if (!wd.findElement(By.id("MassCB")).isSelected()) {
@@ -94,6 +104,26 @@ public class ContactHelper extends BaseHelper {
         }
     }
 
+    public void prepareUserListIfEmpty(UserData userData) {
+        Boolean emptyUserList = userListIsEmpty();
+        System.out.println(" empty user list = "+emptyUserList);
+        if (emptyUserList == true) {
+            createUser(userData);
+            returnHomePage();
+        }
+    }
+
+
+    public void createUser(UserData userData) {
+        addNewUserLink();
+        fillUserParameters(userData, true);
+        submitNewUser();
+        returnHomePage();
+    }
+
+    public void returnHomePage() {
+        wd.findElement(By.linkText("home page")).click();
+    }
 
 }
 

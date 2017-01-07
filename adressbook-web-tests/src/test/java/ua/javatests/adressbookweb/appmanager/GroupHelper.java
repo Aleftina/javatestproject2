@@ -2,7 +2,6 @@ package ua.javatests.adressbookweb.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import ua.javatests.adressbookweb.model.GroupData;
 
@@ -30,13 +29,12 @@ public class GroupHelper extends BaseHelper{
     public void deleteFirstGroupInList() {
         selectFirstGroupInList();
         click(By.name("delete"));
+        returnGroupPageLink();
     }
 
     public void prepareGroupListIfEmpty(GroupData groupData) {
         if (checkGroupsListNotEmpty() == false) {
-            initGroupCreation();
-            fillNewGroupParameters(groupData);
-            submitNewGroup();
+            createGroup(groupData);
         }
     }
 
@@ -66,5 +64,23 @@ public class GroupHelper extends BaseHelper{
 
     public void submitGroupModification() {
         click(By.name("update"));
+    }
+
+    public void createGroup(GroupData groupData) {
+        initGroupCreation();
+        fillNewGroupParameters(groupData);
+        submitNewGroup();
+        returnGroupPageLink();
+    }
+
+    public void modifyGroup(GroupData groupData) {
+        initGroupModification();
+        fillNewGroupParameters(groupData);
+        submitGroupModification();
+        returnGroupPageLink();
+    }
+
+    public void returnGroupPageLink() {
+        click(By.linkText("group page"));
     }
 }
