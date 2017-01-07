@@ -12,10 +12,9 @@ public class GroupDeletionTests extends BaseTest {
         applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group 1", "header", "footer"));
         int sizeBefore = applic.getGroupHelper().getGroupsCount();
 
-        applic.getGroupHelper().deleteFirstGroupInList();
+        applic.getGroupHelper().deleteGroup(0);
 
         int sizeAfter = applic.getGroupHelper().getGroupsCount();
         Assert.assertEquals(sizeBefore, sizeAfter+1);
-
     }
 }

@@ -10,7 +10,7 @@ public class UserCreationTests extends BaseTest {
     @Test
     public void testUserCreation() {
         applic.getNavigationHelper().groupsLink();
-        applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group 1", null, null));
+        applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group 1", "preparation", null));
 
         applic.getNavigationHelper().homePageLink();
         int sizeBefore = applic.getContactHelper().getUsersCount();

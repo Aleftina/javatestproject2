@@ -13,7 +13,7 @@ public class GroupModificationsTests extends BaseTest {
         applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group 1", "header", "footer"));
         int sizeBefore = applic.getGroupHelper().getGroupsCount();
 
-        applic.getGroupHelper().selectFirstGroupInList();
+        applic.getGroupHelper().selectGroup(0);
         applic.getGroupHelper().modifyGroup(new GroupData("group modified", "header modified", "footer modified"));
 
         int sizeAfter = applic.getGroupHelper().getGroupsCount();

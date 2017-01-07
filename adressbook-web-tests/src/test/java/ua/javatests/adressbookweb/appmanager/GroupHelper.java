@@ -2,8 +2,11 @@ package ua.javatests.adressbookweb.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import ua.javatests.adressbookweb.model.GroupData;
+
+import java.util.List;
 
 
 public class GroupHelper extends BaseHelper{
@@ -26,8 +29,8 @@ public class GroupHelper extends BaseHelper{
         click(By.name("new"));
     }
 
-    public void deleteFirstGroupInList() {
-        selectFirstGroupInList();
+    public void deleteGroup(int index) {
+        selectGroup(index);
         click(By.name("delete"));
         returnGroupPageLink();
     }
@@ -38,9 +41,11 @@ public class GroupHelper extends BaseHelper{
         }
     }
 
-    public void selectFirstGroupInList() {
+    public void selectGroup(int index) {
+        List<WebElement> list = wd.findElements(By.name("selected[]"));
+
         if (checkGroupsListNotEmpty() == true) {
-            if (!wd.findElement(By.name("selected[]")).isSelected()) {
+            if (! list.get(index).isSelected()) {
                 click(By.name("selected[]"));
             }
             else {

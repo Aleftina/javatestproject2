@@ -50,7 +50,7 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void selectUser(int i) {
-        i++;
+        i+=2;
         WebElement d = wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr["+i+"]/td[1]"));
         if (!d.isSelected()) {
             d.click();
