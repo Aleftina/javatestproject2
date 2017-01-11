@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import ua.javatests.adressbookweb.model.GroupData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -46,14 +47,14 @@ public class GroupHelper extends BaseHelper{
 
         if (checkGroupsListNotEmpty() == true) {
             if (! list.get(index).isSelected()) {
-                click(By.name("selected[]"));
+                //click(By.name("selected[]"));
+                list.get(index).click();
             }
             else {
                 Assert.assertTrue(wd.findElement(By.name("selected[]")).isSelected());
                 System.out.println("group is already selected");
             }
         }
-        System.out.println("Groups list is empty");
     }
 
     public Boolean checkGroupsListNotEmpty() {
@@ -91,5 +92,17 @@ public class GroupHelper extends BaseHelper{
 
     public int getGroupsCount() {
         return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<GroupData> getGroupList() {
+        List<GroupData> list = new ArrayList<>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+        for (WebElement element: elements){
+            String groupName = element.getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            GroupData group = new GroupData(id, groupName, null, null);
+            list.add(group);
+        }
+        return list;
     }
 }

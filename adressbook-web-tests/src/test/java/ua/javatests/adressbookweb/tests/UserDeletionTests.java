@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.GroupData;
 import ua.javatests.adressbookweb.model.UserData;
 
+import java.util.List;
+
 
 public class UserDeletionTests extends BaseTest {
 
@@ -16,14 +18,16 @@ public class UserDeletionTests extends BaseTest {
 
         applic.getNavigationHelper().homePageLink();
         applic.getContactHelper().prepareUserListIfEmpty(new UserData("first name", "second name", "97654321", "asd@dfg", "group 1"));
+        List<UserData> listBefore = applic.getContactHelper().getUserList();
 
-        int sizeBefore = applic.getContactHelper().getUsersCount();
-
-        applic.getContactHelper().deleteUser(0);
+        applic.getContactHelper().deleteUser(listBefore.size()-1);
         applic.getNavigationHelper().homePageLink();
 
-        int sizeAfter = applic.getContactHelper().getUsersCount();
-        Assert.assertEquals(sizeBefore, sizeAfter+1);
+        List<UserData> listAfter = applic.getContactHelper().getUserList();
+        Assert.assertEquals(listBefore.size(), listAfter.size()+1);
+
+        listBefore.remove(listBefore.size()-1);
+        Assert.assertEquals(listBefore, listAfter);
     }
 
     @Test

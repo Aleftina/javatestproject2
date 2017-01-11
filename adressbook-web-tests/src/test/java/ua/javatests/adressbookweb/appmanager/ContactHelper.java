@@ -9,7 +9,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import ua.javatests.adressbookweb.model.GroupData;
 import ua.javatests.adressbookweb.model.UserData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends BaseHelper {
 
@@ -50,15 +54,15 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void selectUser(int i) {
-        i+=2;
-        WebElement d = wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr["+i+"]/td[1]"));
+        i += 2;
+        WebElement d = wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + i + "]/td[1]"));
         if (!d.isSelected()) {
             d.click();
         }
     }
 
     public void editUser(int i) {
-        i++;
+        i+=2;
         wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + i + "]/td[8]/a/img")).click();
     }
 
@@ -68,7 +72,7 @@ public class ContactHelper extends BaseHelper {
         alertAcceptDelete();
     }
 
-    public void modifyUser(int i, UserData userData){
+    public void modifyUser(int i, UserData userData) {
         selectUser(i);
         editUser(i);
         fillUserParameters(userData, false);
@@ -77,10 +81,11 @@ public class ContactHelper extends BaseHelper {
 
     public Boolean userListIsEmpty() {
         //if (! isElementPresent(By.name("#maintable tr[2]"))) {
-        if (! isElementPresent(By.xpath(".//*[@id='maintable']/tbody/tr[2]"))) {
-         return true;
+        if (!isElementPresent(By.xpath(".//*[@id='maintable']/tbody/tr[2]"))) {
+            return true;
+        } else {
+            return false;
         }
-        else {return false;}
     }
 
     public void submitNewUser() {
@@ -106,7 +111,7 @@ public class ContactHelper extends BaseHelper {
 
     public void prepareUserListIfEmpty(UserData userData) {
         Boolean emptyUserList = userListIsEmpty();
-        System.out.println(" empty user list = "+emptyUserList);
+        System.out.println(" empty user list = " + emptyUserList);
         if (emptyUserList == true) {
             createUser(userData);
             returnHomePage();
@@ -127,6 +132,42 @@ public class ContactHelper extends BaseHelper {
 
     public int getUsersCount() {
         return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<UserData> getUserList() {
+        List<UserData> list = new ArrayList<>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        for (WebElement element : elements) {
+            String userInfo = element.getText(); //.split(" ");
+            List<String> userData = new ArrayList<>();
+            System.out.println("String user list = " + userInfo.toString());
+            String id = element.findElement(By.tagName("input")).getAttribute("id");
+
+            //for (String userItem: userInfo) {
+                //userData.add(userItem);
+            //}
+
+            //list.add(new UserData(id, userInfo[1], userInfo[0], null, null, null));
+            list.add(new UserData(id, userInfo, null, null, null, null));
+
+                //userData.add(userInfo[i])
+
+        }
+        System.out.println("list size = " + elements.size());
+        return list;
+    }
+
+
+
+
+    public List<GroupData> getGroupList() {
+        List<GroupData> list = new ArrayList<>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+        for (WebElement element: elements){
+            String name = element.getText();
+            list.add(new GroupData(name, null, null));
+        }
+        return list;
     }
 }
 
