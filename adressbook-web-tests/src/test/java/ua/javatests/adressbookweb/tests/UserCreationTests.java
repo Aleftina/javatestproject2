@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserCreationTests extends BaseTest {
 
-    @Test
+    @Test(enabled = false)
     public void testUserCreation() {
         //prepare group, if empty
         applic.getNavigationHelper().groupsLink();
@@ -29,7 +29,7 @@ public class UserCreationTests extends BaseTest {
         Assert.assertEquals(new HashSet<>(listBefore), new HashSet<>(listAfter));
     }
 
-    @Test
+    @Test()
     public void loopCreation() {
         for (int i = 0; i < 10; i++) {
             testUserCreation();

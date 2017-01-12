@@ -28,7 +28,7 @@ public class GroupCreationTests extends BaseTest {
 
     }
     
-    @Test
+    @Test(enabled = false)
     public void loopGroupCreation() {
         for (int i = 0; i < 9; i++) {
             testGroupCreation();

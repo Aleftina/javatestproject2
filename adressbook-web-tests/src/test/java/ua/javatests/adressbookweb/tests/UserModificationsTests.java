@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserModificationsTests extends BaseTest {
 
-    @Test
+    @Test(enabled = false)
     public void testUserInfoUpdate() {
         //prepare group, if empty
         applic.getNavigationHelper().groupsLink();
