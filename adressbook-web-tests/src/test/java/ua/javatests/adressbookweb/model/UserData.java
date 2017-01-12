@@ -1,65 +1,39 @@
 package ua.javatests.adressbookweb.model;
 
 public class UserData {
-    private final String id;
+    private int id;
     private final String lastName;
     private final String firstName;
     private final String mobile;
     private final String email;
     private final String group;
 
-    public UserData(String firstName, String lastName, String mobile, String email, String group) {
-        this.id = null;
+    public UserData(String lastName, String firstName, String mobile, String email, String group) {
+        this.id = Integer.MAX_VALUE;
         this.firstName = firstName;
         this.lastName = lastName;
         this.mobile = mobile;
         this.email = email;
-
         this.group = group;
     }
 
 
-    public UserData(String id, String firstName, String lastName, String mobile, String email, String group) {
+    public UserData(int id, String lastName, String firstName, String mobile, String email, String group) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.mobile = mobile;
         this.email = email;
-
         this.group = group;
     }
 
-    @Override
-    public String toString() {
-        return "UserData{" +
-                "id='" + id + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                '}';
+    public int getId() {
+        return id;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        UserData userData = (UserData) o;
-
-        if (id != null ? !id.equals(userData.id) : userData.id != null) return false;
-        if (lastName != null ? !lastName.equals(userData.lastName) : userData.lastName != null) return false;
-        return firstName != null ? firstName.equals(userData.firstName) : userData.firstName == null;
-
+    public void setId(int id) {
+        this.id = id;
     }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        return result;
-    }
-
-    public String getId() {return id;}
 
     public String getFirstName() {
         return firstName;
@@ -79,5 +53,33 @@ public class UserData {
 
     public String getGroup() {
         return group;
+    }
+
+    @Override
+    public String toString() {
+        return "UserData{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserData userData = (UserData) o;
+
+        if (lastName != null ? !lastName.equals(userData.lastName) : userData.lastName != null) return false;
+        return firstName != null ? firstName.equals(userData.firstName) : userData.firstName == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = lastName != null ? lastName.hashCode() : 0;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        return result;
     }
 }

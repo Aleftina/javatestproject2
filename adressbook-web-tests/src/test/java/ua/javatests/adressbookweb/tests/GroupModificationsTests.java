@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.GroupData;
 
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -16,7 +16,7 @@ public class GroupModificationsTests extends BaseTest {
         applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group 1", "header", "footer"));
 
         List<GroupData> listBefore = applic.getGroupHelper().getGroupList();
-        int lastElement = listBefore.size()-1;
+        int lastElement = listBefore.size() - 1;
 
         applic.getGroupHelper().selectGroup(lastElement);
         GroupData group = new GroupData(listBefore.get(lastElement).getId(), "group modified", "header modified", "footer modified");
@@ -27,6 +27,9 @@ public class GroupModificationsTests extends BaseTest {
 
         listBefore.remove(lastElement);
         listBefore.add(group);
-        Assert.assertEquals(new HashSet<Object>(listBefore), new HashSet<Object>(listAfter));
+        Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+        listBefore.sort(byId);
+        listAfter.sort(byId);
+        Assert.assertEquals(listBefore, listAfter);
     }
 }

@@ -43,16 +43,6 @@ public class ContactHelper extends BaseHelper {
         }
     }
 
-    public void selectUserById(String id) {
-        if (isElementPresent(By.id(id))) {
-            if (!wd.findElement(By.id(id)).isSelected()) {
-                click(By.id(id));
-            }
-        } else {
-            System.out.println("No element with id = " + id);
-        }
-    }
-
     public void selectUser(int i) {
         i += 2;
         WebElement d = wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + i + "]/td[1]"));
@@ -62,7 +52,7 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void editUser(int i) {
-        i+=2;
+        i += 2;
         wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + i + "]/td[8]/a/img")).click();
     }
 
@@ -105,7 +95,7 @@ public class ContactHelper extends BaseHelper {
             if (!wd.findElement(By.id("MassCB")).isSelected()) {
                 click(By.id("MassCB"));
             }
-            System.out.println("select all already selected");
+            System.out.println("selectAll already selected");
         }
     }
 
@@ -130,42 +120,19 @@ public class ContactHelper extends BaseHelper {
         wd.findElement(By.linkText("home page")).click();
     }
 
-    public int getUsersCount() {
-        return wd.findElements(By.name("selected[]")).size();
-    }
-
     public List<UserData> getUserList() {
         List<UserData> list = new ArrayList<>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
-        for (WebElement element : elements) {
-            String userInfo = element.getText(); //.split(" ");
-            List<String> userData = new ArrayList<>();
-            System.out.println("String user list = " + userInfo.toString());
-            String id = element.findElement(By.tagName("input")).getAttribute("id");
 
-            //for (String userItem: userInfo) {
-                //userData.add(userItem);
-            //}
+        //for (WebElement element : elements) {
+        for (int j = 0; j < elements.size(); j++) {
+           // String[] userInfo = null;//element.getText().split(" ");
+            int i = j+2;
+            String lastName = String.valueOf(wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr["+i+"]/td[2]")).getText());
+            String name = String.valueOf(wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr["+i+"]/td[3]")).getText());
+            int id = Integer.parseInt(elements.get(j).findElement(By.tagName("input")).getAttribute("id"));
 
-            //list.add(new UserData(id, userInfo[1], userInfo[0], null, null, null));
-            list.add(new UserData(id, userInfo, null, null, null, null));
-
-                //userData.add(userInfo[i])
-
-        }
-        System.out.println("list size = " + elements.size());
-        return list;
-    }
-
-
-
-
-    public List<GroupData> getGroupList() {
-        List<GroupData> list = new ArrayList<>();
-        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-        for (WebElement element: elements){
-            String name = element.getText();
-            list.add(new GroupData(name, null, null));
+            list.add(new UserData(id, lastName, name, null, null, null));
         }
         return list;
     }
