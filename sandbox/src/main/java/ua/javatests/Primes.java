@@ -1,6 +1,10 @@
 package ua.javatests;
 
 /**
+<<<<<<< HEAD
+=======
+
+>>>>>>> eb148fa7caa377cac49cc675d246623161a24879
  */
 public class Primes {
 
@@ -50,4 +54,8 @@ public class Primes {
         }
         return true;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> eb148fa7caa377cac49cc675d246623161a24879

@@ -35,6 +35,7 @@ public class ContactHelper extends BaseHelper {
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     }
 
+<<<<<<< HEAD
     public void alertAcceptDelete() {
         Alert a = new WebDriverWait(wd, 2).until(ExpectedConditions.alertIsPresent());
         if (a != null) {
@@ -43,6 +44,8 @@ public class ContactHelper extends BaseHelper {
         }
     }
 
+=======
+>>>>>>> eb148fa7caa377cac49cc675d246623161a24879
     public void selectUser(int i) {
         i += 2;
         WebElement d = wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + i + "]/td[1]"));
@@ -52,6 +55,7 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void editUser(int i) {
+<<<<<<< HEAD
         i += 2;
         wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + i + "]/td[8]/a/img")).click();
     }
@@ -75,6 +79,15 @@ public class ContactHelper extends BaseHelper {
             return true;
         } else {
             return false;
+=======
+        i++;
+        wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + i + "]/td[8]/a/img")).click();
+    }
+
+    public Boolean userListIsEmpty() {
+        if (! isElementPresent(By.xpath(".//*[@id='maintable']/tbody/tr[2]"))) {
+         return true;
+>>>>>>> eb148fa7caa377cac49cc675d246623161a24879
         }
     }
 
@@ -108,7 +121,15 @@ public class ContactHelper extends BaseHelper {
         }
     }
 
+    public void alertAcceptDelete() {
+        Alert a = new WebDriverWait(wd, 2).until(ExpectedConditions.alertIsPresent());
+        if (a != null) {
+            System.out.println("alert is present");
+            wd.switchTo().alert().accept();
+        }
+    }
 
+<<<<<<< HEAD
     public void createUser(UserData userData) {
         addNewUserLink();
         fillUserParameters(userData, true);
@@ -138,4 +159,20 @@ public class ContactHelper extends BaseHelper {
     }
 }
 
+=======
+    public int usersCounter() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+>>>>>>> eb148fa7caa377cac49cc675d246623161a24879
 
+    public List<UserData> getUsersList() {
+        List<UserData> usersList = new ArrayList<>();
+        List<WebElement> elements = wd.findElements(By.name("selected[]"));
+        for (WebElement element: elements) {
+            String name = element.getText();
+            UserData user = new UserData(name, null, null, null, null);
+            usersList.add(user);
+        }
+        return usersList;
+    }
+}

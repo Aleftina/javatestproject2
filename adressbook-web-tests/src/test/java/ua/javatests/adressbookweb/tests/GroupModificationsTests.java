@@ -4,8 +4,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.GroupData;
 
+<<<<<<< HEAD
 import java.util.Comparator;
 import java.util.List;
+=======
+import java.util.List;
+
+>>>>>>> eb148fa7caa377cac49cc675d246623161a24879
 
 
 public class GroupModificationsTests extends BaseTest {
@@ -13,6 +18,7 @@ public class GroupModificationsTests extends BaseTest {
     @Test
     public void testsGroupModification() {
         applic.getNavigationHelper().groupsLink();
+<<<<<<< HEAD
         applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group 1", "header", "footer"));
 
         List<GroupData> listBefore = applic.getGroupHelper().getGroupList();
@@ -32,4 +38,18 @@ public class GroupModificationsTests extends BaseTest {
         listAfter.sort(byId);
         Assert.assertEquals(listBefore, listAfter);
     }
+=======
+        applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group for modification", "header", "footer"));
+        List<GroupData> groupsBefore = applic.getGroupHelper().getGroupList();
+
+        applic.getGroupHelper().selectGroup(1);
+        applic.getGroupHelper().initGroupModification();
+        applic.getGroupHelper().fillNewGroupParameters(new GroupData("group modified", "header modified", "footer modified"));
+        applic.getGroupHelper().submitGroupModification();
+        applic.getNavigationHelper().returnGroupPageLink();
+
+        List<GroupData> groupsAfter = applic.getGroupHelper().getGroupList();
+        Assert.assertEquals(groupsBefore.size(), groupsAfter.size());
+}
+>>>>>>> eb148fa7caa377cac49cc675d246623161a24879
 }

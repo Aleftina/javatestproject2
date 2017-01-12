@@ -28,4 +28,8 @@ public class PrimesTests {
         long n = Integer.MAX_VALUE;
         Assert.assertTrue(Primes.isPrimeWhile(n));
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> eb148fa7caa377cac49cc675d246623161a24879

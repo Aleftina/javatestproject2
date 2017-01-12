@@ -3,7 +3,10 @@ package ua.javatests.adressbookweb.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+<<<<<<< HEAD
 import ua.javatests.adressbookweb.model.GroupData;
+=======
+>>>>>>> eb148fa7caa377cac49cc675d246623161a24879
 import ua.javatests.adressbookweb.model.UserData;
 
 import java.util.List;
@@ -18,6 +21,7 @@ public class UserDeletionTests extends BaseTest {
         applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group 1", "preparation", null));
         //prepare contact, if empty
         applic.getNavigationHelper().homePageLink();
+<<<<<<< HEAD
         applic.getContactHelper().prepareUserListIfEmpty(new UserData("lastname", "name", "97654321", "asd@dfg", "group 1"));
         List<UserData> listBefore = applic.getContactHelper().getUserList();
         //delete contact
@@ -31,6 +35,18 @@ public class UserDeletionTests extends BaseTest {
         listAfter.add(deletedUser);
         Assert.assertEquals(listBefore, listAfter);
 
+=======
+        createUserIfListIsEmpty();
+        List<UserData> usersBefore = applic.getContactHelper().getUsersList();
+
+        applic.getContactHelper().selectUser(1);
+        applic.getContactHelper().submitUserDelete();
+        applic.getContactHelper().alertAcceptDelete();
+        applic.getNavigationHelper().homePageLink();
+
+        List<UserData> usersAfter = applic.getContactHelper().getUsersList();
+        Assert.assertEquals(usersAfter.size() + 1, usersBefore.size());
+>>>>>>> eb148fa7caa377cac49cc675d246623161a24879
     }
 
     @Test
