@@ -11,7 +11,7 @@ import java.util.List;
 
 public class UserDeletionTests extends BaseTest {
 
-    @Test
+    @Test(enabled=false)
     public void testUserDelete() {
         //prepare group, if empty
         applic.getNavigationHelper().groupsLink();

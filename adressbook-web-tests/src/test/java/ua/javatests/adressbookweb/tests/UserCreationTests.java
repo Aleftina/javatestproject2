@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserCreationTests extends BaseTest {
 
-    @Test
+    @Test(enabled=false)
     public void testUserCreation() {
         //prepare group, if empty
         applic.getNavigationHelper().groupsLink();
