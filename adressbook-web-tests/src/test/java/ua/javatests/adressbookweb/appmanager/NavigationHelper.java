@@ -11,11 +11,11 @@ public class NavigationHelper extends BaseHelper {
         super(wd);
     }
 
-    public void groupsLink() {
+    public void groupsPage() {
         wd.findElement(By.linkText("groups")).click();
     }
 
-    public void homePageLink() {
+    public void homePage() {
         wd.findElement(By.linkText("home")).click();
     }
 }

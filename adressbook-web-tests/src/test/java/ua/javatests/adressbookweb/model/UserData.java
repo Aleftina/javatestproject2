@@ -1,42 +1,68 @@
 package ua.javatests.adressbookweb.model;
 
 public class UserData {
-    private int id;
-    private final String lastName;
-    private final String firstName;
-    private final String mobile;
-    private final String email;
-    private final String group;
-
-    public UserData(String lastName, String firstName, String mobile, String email, String group) {
-        this.id = Integer.MAX_VALUE;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.mobile = mobile;
-        this.email = email;
-        this.group = group;
-    }
-
-
-    public UserData(int id, String lastName, String firstName, String mobile, String email, String group) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.mobile = mobile;
-        this.email = email;
-        this.group = group;
-    }
+    private int id = Integer.MAX_VALUE;
+    private String lastName;
+    private String name;
+    private String mobile;
+    private String email;
+    private String group;
+//
+//    public UserData(String lastName, String name, String mobile, String email, String group) {
+//        this.id = Integer.MAX_VALUE;
+//        this.name = name;
+//        this.lastName = lastName;
+//        this.mobile = mobile;
+//        this.email = email;
+//        this.group = group;
+//    }
+//
+//
+//    public UserData(int id, String lastName, String name, String mobile, String email, String group) {
+//        this.id = id;
+//        this.name = name;
+//        this.lastName = lastName;
+//        this.mobile = mobile;
+//        this.email = email;
+//        this.group = group;
+//    }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public UserData withId(int id) {
         this.id = id;
+        return this;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public UserData withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public UserData withName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public UserData withMobile(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+    public UserData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public UserData withGroup(String group) {
+        this.group = group;
+        return this;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getLastName() {
@@ -60,7 +86,7 @@ public class UserData {
         return "UserData{" +
                 "id=" + id +
                 ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
+                ", firstName='" + name + '\'' +
                 '}';
     }
 
@@ -72,14 +98,14 @@ public class UserData {
         UserData userData = (UserData) o;
 
         if (lastName != null ? !lastName.equals(userData.lastName) : userData.lastName != null) return false;
-        return firstName != null ? firstName.equals(userData.firstName) : userData.firstName == null;
+        return name != null ? name.equals(userData.name) : userData.name == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = lastName != null ? lastName.hashCode() : 0;
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
 }

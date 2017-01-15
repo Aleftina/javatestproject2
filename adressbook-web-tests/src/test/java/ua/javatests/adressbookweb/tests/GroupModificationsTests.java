@@ -1,6 +1,7 @@
 package ua.javatests.adressbookweb.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.GroupData;
 
@@ -10,22 +11,26 @@ import java.util.List;
 
 public class GroupModificationsTests extends BaseTest {
 
+    @BeforeMethod
+    public void checkPreconditions() {
+        applic.goTo().groupsPage();
+        applic.group().prepareGroupList(new GroupData()
+                .withGroupName("group 1").withHeader("header").withFooter("footer"));
+    }
+
     @Test
     public void testsGroupModification() {
-        applic.getNavigationHelper().groupsLink();
-        applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group 1", "header", "footer"));
+        List<GroupData> listBefore = applic.group().list();
+        int index = listBefore.size() - 1;
+        GroupData group = new GroupData().withId(listBefore.get(index).getId())
+                .withGroupName("group modified").withHeader("header modified").withFooter("footer modified");
 
-        List<GroupData> listBefore = applic.getGroupHelper().getGroupList();
-        int lastElement = listBefore.size() - 1;
+        applic.group().modify(index, group);
 
-        applic.getGroupHelper().selectGroup(lastElement);
-        GroupData group = new GroupData(listBefore.get(lastElement).getId(), "group modified", "header modified", "footer modified");
-        applic.getGroupHelper().modifyGroup(group);
-
-        List<GroupData> listAfter = applic.getGroupHelper().getGroupList();
+        List<GroupData> listAfter = applic.group().list();
         Assert.assertEquals(listBefore.size(), listAfter.size());
 
-        listBefore.remove(lastElement);
+        listBefore.remove(index);
         listBefore.add(group);
         Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
         listBefore.sort(byId);

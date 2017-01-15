@@ -2,6 +2,7 @@ package ua.javatests.adressbookweb.tests;
 
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.GroupData;
 import ua.javatests.adressbookweb.model.UserData;
@@ -11,20 +12,25 @@ import java.util.List;
 
 public class UserDeletionTests extends BaseTest {
 
-    @Test(enabled=false)
+    @BeforeMethod
+    public void checkPreconditions() {
+        applic.goTo().groupsPage();
+        applic.group().prepareGroupList(new GroupData()
+                .withGroupName("group 1").withHeader("preparation"));
+
+        applic.goTo().homePage();
+        applic.contact().prepareUserList(new UserData().withLastName("lastname")
+                .withName("name").withMobile("97654321").withEmail("asd@dfg").withGroup("group 1"));
+    }
+
+    @Test
     public void testUserDelete() {
-        //prepare group, if empty
-        applic.getNavigationHelper().groupsLink();
-        applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group 1", "preparation", null));
-        //prepare contact, if empty
-        applic.getNavigationHelper().homePageLink();
-        applic.getContactHelper().prepareUserListIfEmpty(new UserData("lastname", "name", "97654321", "asd@dfg", "group 1"));
-        List<UserData> listBefore = applic.getContactHelper().getUserList();
-        //delete contact
-        applic.getContactHelper().deleteUser(listBefore.size() - 1);
-        applic.getNavigationHelper().homePageLink();
+        List<UserData> listBefore = applic.contact().list();
+        
+        applic.contact().delete(listBefore.size() - 1);
+        applic.goTo().homePage();
         //check lists and their sizes
-        List<UserData> listAfter = applic.getContactHelper().getUserList();
+        List<UserData> listAfter = applic.contact().list();
         Assert.assertEquals(listBefore.size(), listAfter.size() + 1);
 
         UserData deletedUser = listBefore.get(listBefore.size() - 1);
@@ -33,11 +39,13 @@ public class UserDeletionTests extends BaseTest {
 
     }
 
+
+
     @Test
     public void testDeleteAll() {
-        applic.getNavigationHelper().homePageLink();
-        applic.getContactHelper().selectAll();
-        applic.getContactHelper().submitUserDelete();
-        applic.getContactHelper().alertAcceptDelete();
+        applic.goTo().homePage();
+        applic.contact().selectAll();
+        applic.contact().submitDelete();
+        applic.contact().alertAcceptDelete();
     }
 }

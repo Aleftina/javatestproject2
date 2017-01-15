@@ -1,6 +1,7 @@
 package ua.javatests.adressbookweb.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.GroupData;
 
@@ -9,17 +10,22 @@ import java.util.List;
 
 public class GroupDeletionTests extends BaseTest {
 
+
+    @BeforeMethod
+    public void checkPreconditions() {
+        applic.goTo().groupsPage();
+        applic.group().prepareGroupList(new GroupData()
+                .withGroupName("group 1").withHeader("header").withFooter("footer"));
+    }
+
     @Test
     public void testGroupDeletion() {
-        applic.getNavigationHelper().groupsLink();
-        applic.getGroupHelper().prepareGroupListIfEmpty(new GroupData("group 1", "header", "footer"));
-
-        List<GroupData> listBefore = applic.getGroupHelper().getGroupList();
+        List<GroupData> listBefore = applic.group().list();
         int index = listBefore.size() - 1;
 
-        applic.getGroupHelper().deleteGroup(index);
+        applic.group().delete(index);
 
-        List<GroupData> listAfter = applic.getGroupHelper().getGroupList();
+        List<GroupData> listAfter = applic.group().list();
         Assert.assertEquals(listBefore.size(), listAfter.size() + 1);
 
         listBefore.remove(index);
@@ -29,6 +35,5 @@ public class GroupDeletionTests extends BaseTest {
         listAfter.sort(byId);
 
         Assert.assertEquals(listBefore, listAfter);
-
     }
 }

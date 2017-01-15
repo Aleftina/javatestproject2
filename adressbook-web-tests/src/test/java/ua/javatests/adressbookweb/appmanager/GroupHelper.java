@@ -30,24 +30,23 @@ public class GroupHelper extends BaseHelper{
         click(By.name("new"));
     }
 
-    public void deleteGroup(int index) {
+    public void delete(int index) {
         selectGroup(index);
         click(By.name("delete"));
         returnGroupPageLink();
     }
 
-    public void prepareGroupListIfEmpty(GroupData groupData) {
-        if (checkGroupsListNotEmpty() == false) {
-            createGroup(groupData);
+    public void prepareGroupList(GroupData groupData) {
+        if (groupsListExist() == false) {
+            create(groupData);
         }
     }
 
     public void selectGroup(int index) {
         List<WebElement> list = wd.findElements(By.name("selected[]"));
 
-        if (checkGroupsListNotEmpty() == true) {
+        if (groupsListExist() == true) {
             if (! list.get(index).isSelected()) {
-                //click(By.name("selected[]"));
                 list.get(index).click();
             }
             else {
@@ -57,7 +56,7 @@ public class GroupHelper extends BaseHelper{
         }
     }
 
-    public Boolean checkGroupsListNotEmpty() {
+    public Boolean groupsListExist() {
         if (!isElementPresent(By.name("selected[]"))) {
             return false;
         }
@@ -72,14 +71,15 @@ public class GroupHelper extends BaseHelper{
         click(By.name("update"));
     }
 
-    public void createGroup(GroupData groupData) {
+    public void create(GroupData groupData) {
         initGroupCreation();
         fillNewGroupParameters(groupData);
         submitNewGroup();
         returnGroupPageLink();
     }
 
-    public void modifyGroup(GroupData groupData) {
+    public void modify(int index, GroupData groupData) {
+        selectGroup(index);
         initGroupModification();
         fillNewGroupParameters(groupData);
         submitGroupModification();
@@ -94,14 +94,13 @@ public class GroupHelper extends BaseHelper{
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<GroupData> getGroupList() {
+    public List<GroupData> list() {
         List<GroupData> list = new ArrayList<>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element: elements){
             String groupName = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            GroupData group = new GroupData(id, groupName, null, null);
-            list.add(group);
+            list.add(new GroupData().withId(id).withGroupName(groupName));
         }
         return list;
     }
