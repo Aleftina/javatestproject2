@@ -44,6 +44,7 @@ public class ContactHelper extends BaseHelper {
 
     public void selectUser(int i) {
         i += 2;
+        System.out.println("i = "+i);
         WebElement d = wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + i + "]/td[1]"));
         if (!d.isSelected()) {
             d.click();
@@ -100,10 +101,8 @@ public class ContactHelper extends BaseHelper {
 
     public void prepareUserList(UserData userData) {
         Boolean emptyUserList = userListIsEmpty();
-        System.out.println(" empty user list = " + emptyUserList);
         if (emptyUserList == true) {
             create(userData);
-            returnHomePage();
         }
     }
 

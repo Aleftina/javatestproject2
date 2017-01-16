@@ -12,6 +12,7 @@ import java.util.List;
 public class UserCreationTests extends BaseTest {
 
     @BeforeMethod
+    @Test
     public void checkPrecondition() {
         applic.goTo().groupsPage();
         applic.group().prepareGroupList(new GroupData().withGroupName("group 1").withHeader("preparation"));

@@ -21,12 +21,12 @@ public class UserDeletionTests extends BaseTest {
         applic.goTo().homePage();
         applic.contact().prepareUserList(new UserData().withLastName("lastname")
                 .withName("name").withMobile("97654321").withEmail("asd@dfg").withGroup("group 1"));
+        applic.goTo().homePage();
     }
 
     @Test
     public void testUserDelete() {
         List<UserData> listBefore = applic.contact().list();
-        
         applic.contact().delete(listBefore.size() - 1);
         applic.goTo().homePage();
         //check lists and their sizes

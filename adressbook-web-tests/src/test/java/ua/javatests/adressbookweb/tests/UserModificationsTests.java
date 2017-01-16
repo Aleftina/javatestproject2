@@ -20,6 +20,7 @@ public class UserModificationsTests extends BaseTest {
         applic.goTo().homePage();
         applic.contact().prepareUserList(new UserData().withLastName("last name").withName("name")
                 .withMobile("98765432").withEmail("sadasd@fsd.fsd").withGroup("group 1"));
+        applic.goTo().homePage();
     }
 
     @Test
