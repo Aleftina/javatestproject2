@@ -12,7 +12,9 @@ import org.testng.Assert;
 import ua.javatests.adressbookweb.model.UserData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends BaseHelper {
 
@@ -131,6 +133,21 @@ public class ContactHelper extends BaseHelper {
             list.add(new UserData().withId(id).withLastName(lastName).withName(name));
         }
         return list;
+    }
+
+    public Set<UserData> all() {
+        Set<UserData> contacts = new HashSet<>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+
+        for (int j = 0; j < elements.size(); j++) {
+            int i = j + 2;
+            String lastName = String.valueOf(wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + i + "]/td[2]")).getText());
+            String name = String.valueOf(wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + i + "]/td[3]")).getText());
+            int id = Integer.parseInt(elements.get(j).findElement(By.tagName("input")).getAttribute("id"));
+
+            contacts.add(new UserData().withId(id).withLastName(lastName).withName(name));
+        }
+        return contacts;
     }
 }
 

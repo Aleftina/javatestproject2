@@ -7,6 +7,7 @@ import ua.javatests.adressbookweb.model.GroupData;
 import ua.javatests.adressbookweb.model.UserData;
 
 import java.util.List;
+import java.util.Set;
 
 
 public class UserModificationsTests extends BaseTest {
@@ -23,8 +24,9 @@ public class UserModificationsTests extends BaseTest {
         applic.goTo().homePage();
     }
 
-    @Test
+    @Test(enabled = false)
     public void testUserInfoUpdate() {
+
         List<UserData> beforeList = applic.contact().list();
         UserData user = new UserData().withId(beforeList.get(beforeList.size()-1).getId())
                 .withLastName("Petrov modified").withName("Oleg modified")

@@ -36,7 +36,6 @@ public class UserDeletionTests extends BaseTest {
         UserData deletedUser = listBefore.get(listBefore.size() - 1);
         listAfter.add(deletedUser);
         Assert.assertEquals(listBefore, listAfter);
-
     }
 
 

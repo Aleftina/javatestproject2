@@ -7,7 +7,9 @@ import org.testng.Assert;
 import ua.javatests.adressbookweb.model.GroupData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class GroupHelper extends BaseHelper{
@@ -36,6 +38,13 @@ public class GroupHelper extends BaseHelper{
         returnGroupPageLink();
     }
 
+    public void delete(GroupData group) {
+        selectGroupById(group.getId());
+        click(By.name("delete"));
+        returnGroupPageLink();
+
+    }
+
     public void prepareGroupList(GroupData groupData) {
         if (groupsListExist() == false) {
             create(groupData);
@@ -48,6 +57,20 @@ public class GroupHelper extends BaseHelper{
         if (groupsListExist() == true) {
             if (! list.get(index).isSelected()) {
                 list.get(index).click();
+            }
+            else {
+                Assert.assertTrue(wd.findElement(By.name("selected[]")).isSelected());
+                System.out.println("group is already selected");
+            }
+        }
+    }
+
+    private void selectGroupById(int id) {
+        WebElement element = wd.findElement(By.cssSelector("input[value='"+id+"']"));
+
+        if (groupsListExist() == true) {
+            if (! element.isSelected()) {
+                element.click();
             }
             else {
                 Assert.assertTrue(wd.findElement(By.name("selected[]")).isSelected());
@@ -71,17 +94,17 @@ public class GroupHelper extends BaseHelper{
         click(By.name("update"));
     }
 
-    public void create(GroupData groupData) {
+    public void create(GroupData group) {
         initGroupCreation();
-        fillNewGroupParameters(groupData);
+        fillNewGroupParameters(group);
         submitNewGroup();
         returnGroupPageLink();
     }
 
-    public void modify(int index, GroupData groupData) {
-        selectGroup(index);
+    public void modify(GroupData group) {
+        selectGroupById(group.getId());
         initGroupModification();
-        fillNewGroupParameters(groupData);
+        fillNewGroupParameters(group);
         submitGroupModification();
         returnGroupPageLink();
     }
@@ -104,4 +127,17 @@ public class GroupHelper extends BaseHelper{
         }
         return list;
     }
+
+
+    public Set<GroupData> all() {
+        Set<GroupData> groups = new HashSet<GroupData>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+        for (WebElement element: elements){
+            String groupName = element.getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            groups.add(new GroupData().withId(id).withGroupName(groupName));
+        }
+        return groups;
+    }
+
 }
