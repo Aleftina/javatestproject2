@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.GroupData;
 import ua.javatests.adressbookweb.model.UserData;
 
-import java.util.List;
+import java.util.Set;
 
 
 public class UserDeletionTests extends BaseTest {
@@ -26,19 +26,19 @@ public class UserDeletionTests extends BaseTest {
 
     @Test
     public void testUserDelete() {
-        List<UserData> listBefore = applic.contact().list();
-        applic.contact().delete(listBefore.size() - 1);
+        Set<UserData> listBefore = applic.contact().all();
+        UserData deletedUser = listBefore.iterator().next();
+
+        applic.contact().delete(deletedUser);
         applic.goTo().homePage();
         //check lists and their sizes
-        List<UserData> listAfter = applic.contact().list();
+        Set<UserData> listAfter = applic.contact().all();
         Assert.assertEquals(listBefore.size(), listAfter.size() + 1);
 
-        UserData deletedUser = listBefore.get(listBefore.size() - 1);
+       // listBefore.remove(deletedUser);
         listAfter.add(deletedUser);
         Assert.assertEquals(listBefore, listAfter);
     }
-
-
 
     @Test
     public void testDeleteAll() {

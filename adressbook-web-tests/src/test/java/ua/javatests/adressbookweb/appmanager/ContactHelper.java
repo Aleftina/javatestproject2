@@ -44,29 +44,47 @@ public class ContactHelper extends BaseHelper {
         }
     }
 
-    public void selectUser(int i) {
+    public void selectUserById(int i) {
         i += 2;
-        System.out.println("i = "+i);
         WebElement d = wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + i + "]/td[1]"));
         if (!d.isSelected()) {
             d.click();
         }
     }
 
-    public void editUser(int i) {
+    private void select(UserData user) {
+        int i = user.getId();
+        WebElement d = wd.findElement(By.cssSelector("input[id='" + i + "']"));
+        if (!d.isSelected()) {
+            d.click();
+        }
+    }
+
+    public void editUserById(int i) {
         i += 2;
         wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + i + "]/td[8]/a/img")).click();
     }
 
-    public void delete(int i) {
-        selectUser(i);
+    public void edit(UserData user) {
+        int i = user.getId();
+        wd.findElement(By.cssSelector("a[href*='edit.php?id=" + i + "']")).click();
+    }
+
+    public void deleteById(int i) {
+        selectUserById(i);
         submitDelete();
         alertAcceptDelete();
     }
 
-    public void modifyUser(int i, UserData userData) {
-        selectUser(i);
-        editUser(i);
+    public void delete(UserData user) {
+        select(user);
+        submitDelete();
+        alertAcceptDelete();
+    }
+
+    public void modify(UserData userData) {
+        select(userData);
+        edit(userData);
         fillUserParameters(userData, false);
         submitUserUpdate();
     }

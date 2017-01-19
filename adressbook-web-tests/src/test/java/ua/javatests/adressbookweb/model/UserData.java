@@ -78,6 +78,7 @@ public class UserData {
 
         UserData userData = (UserData) o;
 
+        if (id != userData.id) return false;
         if (lastName != null ? !lastName.equals(userData.lastName) : userData.lastName != null) return false;
         return name != null ? name.equals(userData.name) : userData.name == null;
 
@@ -85,7 +86,8 @@ public class UserData {
 
     @Override
     public int hashCode() {
-        int result = lastName != null ? lastName.hashCode() : 0;
+        int result = id;
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }

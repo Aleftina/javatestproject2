@@ -24,19 +24,22 @@ public class UserModificationsTests extends BaseTest {
         applic.goTo().homePage();
     }
 
-    @Test(enabled = false)
+    @Test
     public void testUserInfoUpdate() {
 
-        List<UserData> beforeList = applic.contact().list();
-        UserData user = new UserData().withId(beforeList.get(beforeList.size()-1).getId())
+        Set<UserData> beforeList = applic.contact().all();
+        UserData modifiedUser = beforeList.iterator().next();
+        UserData user = new UserData().withId(modifiedUser.getId())
                 .withLastName("Petrov modified").withName("Oleg modified")
                 .withMobile("0987654321").withEmail("zxcv@klkl.opop");
-        applic.contact().modifyUser(beforeList.size()-1, user);
+
+        applic.contact().modify(user);
+
         applic.goTo().homePage();
         //check lists and their sizes
-        List<UserData> afterList = applic.contact().list();
-        beforeList.remove(beforeList.size()-1);
-        beforeList.add(user);
+        Set<UserData> afterList = applic.contact().all();
+        beforeList.remove(user);
+        beforeList.add(modifiedUser);
         Assert.assertEquals(beforeList, afterList);
     }
 
