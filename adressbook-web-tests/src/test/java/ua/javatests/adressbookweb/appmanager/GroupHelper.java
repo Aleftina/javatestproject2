@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import ua.javatests.adressbookweb.model.GroupData;
+import ua.javatests.adressbookweb.model.Groups;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -129,8 +130,8 @@ public class GroupHelper extends BaseHelper{
     }
 
 
-    public Set<GroupData> all() {
-        Set<GroupData> groups = new HashSet<GroupData>();
+    public Groups all() {
+        Groups groups = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element: elements){
             String groupName = element.getText();

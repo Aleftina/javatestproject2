@@ -38,8 +38,8 @@ public class UserModificationsTests extends BaseTest {
         applic.goTo().homePage();
         //check lists and their sizes
         Set<UserData> afterList = applic.contact().all();
-        beforeList.remove(user);
-        beforeList.add(modifiedUser);
+        beforeList.remove(modifiedUser);
+        beforeList.add(user);
         Assert.assertEquals(beforeList, afterList);
     }
 
