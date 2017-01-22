@@ -1,13 +1,14 @@
 package ua.javatests.adressbookweb.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ua.javatests.adressbookweb.model.Contacts;
 import ua.javatests.adressbookweb.model.GroupData;
 import ua.javatests.adressbookweb.model.UserData;
 
-import java.util.List;
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 
 public class UserModificationsTests extends BaseTest {
@@ -27,20 +28,18 @@ public class UserModificationsTests extends BaseTest {
     @Test
     public void testUserInfoUpdate() {
 
-        Set<UserData> beforeList = applic.contact().all();
+        Contacts beforeList = applic.contact().all();
         UserData modifiedUser = beforeList.iterator().next();
         UserData user = new UserData().withId(modifiedUser.getId())
                 .withLastName("Petrov modified").withName("Oleg modified")
                 .withMobile("0987654321").withEmail("zxcv@klkl.opop");
 
         applic.contact().modify(user);
-
         applic.goTo().homePage();
         //check lists and their sizes
-        Set<UserData> afterList = applic.contact().all();
-        beforeList.remove(modifiedUser);
-        beforeList.add(user);
-        Assert.assertEquals(beforeList, afterList);
+        Contacts afterList = applic.contact().all();
+        assertEquals(beforeList.size(), afterList.size());
+        assertThat(beforeList.without(modifiedUser).withAdded(user), equalTo(afterList));
     }
 
 

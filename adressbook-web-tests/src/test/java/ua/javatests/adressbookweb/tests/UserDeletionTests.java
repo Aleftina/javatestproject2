@@ -1,13 +1,15 @@
 package ua.javatests.adressbookweb.tests;
 
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ua.javatests.adressbookweb.model.Contacts;
 import ua.javatests.adressbookweb.model.GroupData;
 import ua.javatests.adressbookweb.model.UserData;
 
-import java.util.Set;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.testng.Assert.assertEquals;
 
 
 public class UserDeletionTests extends BaseTest {
@@ -26,18 +28,18 @@ public class UserDeletionTests extends BaseTest {
 
     @Test
     public void testUserDelete() {
-        Set<UserData> listBefore = applic.contact().all();
+        Contacts listBefore = applic.contact().all();
         UserData deletedUser = listBefore.iterator().next();
 
         applic.contact().delete(deletedUser);
         applic.goTo().homePage();
         //check lists and their sizes
-        Set<UserData> listAfter = applic.contact().all();
-        Assert.assertEquals(listBefore.size(), listAfter.size() + 1);
+        Contacts listAfter = applic.contact().all();
+        assertEquals(listBefore.size(), listAfter.size() + 1);
 
         //listBefore.remove(deletedUser);
-        listAfter.add(deletedUser);
-        Assert.assertEquals(listBefore, listAfter);
+        //listAfter.add(deletedUser);
+        assertThat(listBefore, equalTo(listAfter.withAdded(deletedUser)));
     }
 
     @Test
