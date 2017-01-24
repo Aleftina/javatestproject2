@@ -24,9 +24,9 @@ public class GroupCreationTests extends BaseTest {
                 mapToInt((g)-> g.getId()).max().getAsInt()))));
     }
     
-    @Test(enabled=false)
+    @Test
     public void loopGroupCreation() {
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 30; i++) {
             testGroupCreation();
         }
     }

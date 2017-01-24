@@ -62,6 +62,10 @@ public class UserData {
         return group;
     }
 
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
     @Override
     public String toString() {
         return "UserData{" +

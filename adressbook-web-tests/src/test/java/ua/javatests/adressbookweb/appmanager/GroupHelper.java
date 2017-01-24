@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 
-public class GroupHelper extends BaseHelper{
+public class GroupHelper extends BaseHelper {
 
     public GroupHelper(WebDriver wd) {
         super(wd);
@@ -42,6 +42,7 @@ public class GroupHelper extends BaseHelper{
     public void delete(GroupData group) {
         selectGroupById(group.getId());
         click(By.name("delete"));
+        groupsCache = null;
         returnGroupPageLink();
 
     }
@@ -56,10 +57,9 @@ public class GroupHelper extends BaseHelper{
         List<WebElement> list = wd.findElements(By.name("selected[]"));
 
         if (groupsListExist() == true) {
-            if (! list.get(index).isSelected()) {
+            if (!list.get(index).isSelected()) {
                 list.get(index).click();
-            }
-            else {
+            } else {
                 Assert.assertTrue(wd.findElement(By.name("selected[]")).isSelected());
                 System.out.println("group is already selected");
             }
@@ -67,13 +67,12 @@ public class GroupHelper extends BaseHelper{
     }
 
     private void selectGroupById(int id) {
-        WebElement element = wd.findElement(By.cssSelector("input[value='"+id+"']"));
+        WebElement element = wd.findElement(By.cssSelector("input[value='" + id + "']"));
 
         if (groupsListExist() == true) {
-            if (! element.isSelected()) {
+            if (!element.isSelected()) {
                 element.click();
-            }
-            else {
+            } else {
                 Assert.assertTrue(wd.findElement(By.name("selected[]")).isSelected());
                 System.out.println("group is already selected");
             }
@@ -99,6 +98,7 @@ public class GroupHelper extends BaseHelper{
         initGroupCreation();
         fillNewGroupParameters(group);
         submitNewGroup();
+        groupsCache = null;
         returnGroupPageLink();
     }
 
@@ -107,6 +107,7 @@ public class GroupHelper extends BaseHelper{
         initGroupModification();
         fillNewGroupParameters(group);
         submitGroupModification();
+        groupsCache = null;
         returnGroupPageLink();
     }
 
@@ -121,7 +122,7 @@ public class GroupHelper extends BaseHelper{
     public List<GroupData> list() {
         List<GroupData> list = new ArrayList<>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-        for (WebElement element: elements){
+        for (WebElement element : elements) {
             String groupName = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             list.add(new GroupData().withId(id).withGroupName(groupName));
@@ -129,16 +130,19 @@ public class GroupHelper extends BaseHelper{
         return list;
     }
 
+    private Groups groupsCache = null;
 
     public Groups all() {
-        Groups groups = new Groups();
+        if (groupsCache != null) {
+            return new Groups(groupsCache);
+        }
+        groupsCache = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-        for (WebElement element: elements){
+        for (WebElement element : elements) {
             String groupName = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            groups.add(new GroupData().withId(id).withGroupName(groupName));
+            groupsCache.add(new GroupData().withId(id).withGroupName(groupName));
         }
-        return groups;
+        return new Groups(groupsCache);
     }
-
 }

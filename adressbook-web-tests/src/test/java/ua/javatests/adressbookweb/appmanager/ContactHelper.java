@@ -1,6 +1,7 @@
 package ua.javatests.adressbookweb.appmanager;
 
 
+import com.google.common.base.Predicate;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -81,6 +82,7 @@ public class ContactHelper extends BaseHelper {
         select(user);
         submitDelete();
         alertAcceptDelete();
+        contactsCache = null;
     }
 
     public void modify(UserData userData) {
@@ -88,6 +90,15 @@ public class ContactHelper extends BaseHelper {
         edit(userData);
         fillUserParameters(userData, false);
         submitUserUpdate();
+        contactsCache = null;
+    }
+
+    public void create(UserData userData) {
+        addNewUserLink();
+        fillUserParameters(userData, true);
+        submitNewUser();
+        contactsCache = null;
+        returnHomePage();
     }
 
     public Boolean userListIsEmpty() {
@@ -100,7 +111,11 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void submitNewUser() {
+        //<input type="submit" name="submit" value="Enter">
+       // <input type="submit" value="Enter" name="submit">
         click(By.name("submit"));
+        //wd.findElement(By.cssSelector("input[value='Enter']")).click();
+    //    wd.findElement(By.cssSelector("input[name='submit']")).click();
     }
 
     public void submitUserUpdate() {
@@ -127,17 +142,24 @@ public class ContactHelper extends BaseHelper {
         }
     }
 
-
-    public void create(UserData userData) {
-        addNewUserLink();
-        fillUserParameters(userData, true);
-        submitNewUser();
-        returnHomePage();
-    }
-
     public void returnHomePage() {
+//        (new WebDriverWait(wd, 15)).until((Predicate<WebDriver>) By.cssSelector("input[type='text']")); // wd.findElement(By.linkText("home page")).isEnabled(),);
         wd.findElement(By.linkText("home page")).click();
-    }
+        /**
+        if (wd.findElement(By.linkText("home page")).isDisplayed()){
+            System.out.println("return home page is displayed");
+            wd.findElement(By.linkText("home page")).click();
+        }
+        else if (wd.findElement(By.cssSelector("input[type='text']")).isDisplayed()){
+            System.out.println("automatically returned to home page");
+*/
+        }
+
+
+        //"input[id='" + i + "']")
+        //String s = "home page";
+//        wd.findElement(By.cssSelector("input[a='"+s+"']")).click();
+
 
     public List<UserData> list() {
         List<UserData> list = new ArrayList<>();
@@ -154,7 +176,9 @@ public class ContactHelper extends BaseHelper {
         return list;
     }
 
-    public Contacts all() {
+    private Contacts contactsCache = null;
+
+    public Contacts all_() {
         Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
 
@@ -167,5 +191,38 @@ public class ContactHelper extends BaseHelper {
             contacts.add(new UserData().withId(id).withLastName(lastName).withName(name));
         }
         return contacts;
+    }
+
+    public Set<UserData> all() {
+        Set<UserData> contacts = new HashSet<>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+
+        for (int j = 0; j < elements.size(); j++) {
+            int i = j + 2;
+            String lastName = String.valueOf(wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + i + "]/td[2]")).getText());
+            String name = String.valueOf(wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + i + "]/td[3]")).getText());
+            int id = Integer.parseInt(elements.get(j).findElement(By.tagName("input")).getAttribute("id"));
+
+            contacts.add(new UserData().withId(id).withLastName(lastName).withName(name));
+        }
+        return contacts;
+    }
+
+    public Contacts all_cache() {
+        if (contactsCache != null) {
+            return new Contacts(contactsCache);
+        }
+        contactsCache = new Contacts();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+
+        for (int j = 0; j < elements.size(); j++) {
+            int i = j + 2;
+            String lastName = String.valueOf(wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + i + "]/td[2]")).getText());
+            String name = String.valueOf(wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + i + "]/td[3]")).getText());
+            int id = Integer.parseInt(elements.get(j).findElement(By.tagName("input")).getAttribute("id"));
+
+            contactsCache.add(new UserData().withId(id).withLastName(lastName).withName(name));
+        }
+        return new Contacts(contactsCache);
     }
 }

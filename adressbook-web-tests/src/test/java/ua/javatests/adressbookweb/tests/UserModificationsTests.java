@@ -25,9 +25,9 @@ public class UserModificationsTests extends BaseTest {
         applic.goTo().homePage();
     }
 
-    @Test
+    @Test(enabled = false)
     public void testUserInfoUpdate() {
-
+/**
         Contacts beforeList = applic.contact().all();
         UserData modifiedUser = beforeList.iterator().next();
         UserData user = new UserData().withId(modifiedUser.getId())
@@ -40,6 +40,7 @@ public class UserModificationsTests extends BaseTest {
         Contacts afterList = applic.contact().all();
         assertEquals(beforeList.size(), afterList.size());
         assertThat(beforeList.without(modifiedUser).withAdded(user), equalTo(afterList));
+ */
     }
 
 
