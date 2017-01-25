@@ -1,14 +1,11 @@
 package ua.javatests.adressbookweb.tests;
 
-import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.GroupData;
 import ua.javatests.adressbookweb.model.UserData;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class UserCreationTests extends BaseTest {
@@ -37,9 +34,6 @@ public class UserCreationTests extends BaseTest {
         Assert.assertEquals(listBefore, listAfter);
 
     }
-
-
-
 
 
     @Test    //(enabled=false)
