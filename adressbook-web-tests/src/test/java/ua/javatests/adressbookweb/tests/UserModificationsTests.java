@@ -38,9 +38,9 @@ public class UserModificationsTests extends BaseTest {
 
         applic.contact().modify(user);
         applic.goTo().homePage();
+        assertThat(beforeList.size(), equalTo(applic.contact().count()));
 
         Contacts afterList = applic.contact().all();
-        assertThat(beforeList.size(), equalTo(afterList.size()));
         assertThat(beforeList.without(modifiedUser).withAdded(user), equalTo(afterList));
     }
 

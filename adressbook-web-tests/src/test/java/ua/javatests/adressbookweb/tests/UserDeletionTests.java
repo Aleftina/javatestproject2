@@ -35,15 +35,14 @@ public class UserDeletionTests extends BaseTest {
 
         applic.contact().delete(deletedUser);
         applic.goTo().homePage();
+        assertThat(listBefore.size(), equalTo(applic.contact().count() + 1));
         //check lists and their sizes
         Contacts listAfter = applic.contact().all();
-
-        assertThat(listBefore.size(), equalTo(listAfter.size() + 1));
         assertThat(listBefore.without(deletedUser), equalTo(listAfter));
 
     }
 
-    @Test
+    @Test(enabled = false)
     public void testDeleteAll() {
         applic.goTo().homePage();
         applic.contact().selectAll();

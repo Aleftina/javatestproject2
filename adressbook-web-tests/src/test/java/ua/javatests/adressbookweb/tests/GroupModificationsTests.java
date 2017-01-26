@@ -28,10 +28,9 @@ public class GroupModificationsTests extends BaseTest {
                 .withGroupName("group modified").withHeader("header modified").withFooter("footer modified");
 
         applic.group().modify(group);
+        assertEquals(listBefore.size(), applic.group().count());
 
         Groups listAfter = applic.group().all();
-
-        assertEquals(listBefore.size(), listAfter.size());
         assertThat(listBefore.without(modifiedGroup).withAdded(group), equalTo(listAfter));
 
     }

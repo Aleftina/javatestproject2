@@ -3,10 +3,14 @@ package ua.javatests.adressbookweb.tests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ua.javatests.adressbookweb.model.Contacts;
 import ua.javatests.adressbookweb.model.GroupData;
 import ua.javatests.adressbookweb.model.UserData;
 
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class UserCreationTests extends BaseTest {
 
@@ -17,25 +21,21 @@ public class UserCreationTests extends BaseTest {
         applic.goTo().homePage();
     }
 
-
     @Test
     public void testUserCreation() {
-        Set<UserData> listBefore = applic.contact().all();
+        Contacts listBefore = applic.contact().all();
 
         UserData user = new UserData().withLastName("Pupkin")
                 .withName("Vasya").withMobile("123254485").withEmail("asda@sadfsdl.ghj").withGroup("group 1");
 
         applic.contact().create(user);
-        Set<UserData> listAfter = applic.contact().all();
-        Assert.assertEquals(listBefore.size() + 1, listAfter.size());
+        assertThat(listBefore.size() + 1, equalTo(applic.contact().count()));
 
-        user.withId( listAfter.stream().mapToInt((usr) -> usr.getId()).max().getAsInt());
-        listBefore.add(user);
-        Assert.assertEquals(listBefore, listAfter);
+        Contacts listAfter = applic.contact().all();
 
+        assertThat(listBefore.withAdded(user
+                .withId(listAfter.stream().mapToInt((usr) -> usr.getId()).max().getAsInt())), equalTo(listAfter));
     }
-
-
 
     @Test (enabled=false)
     public void loopCreation() {

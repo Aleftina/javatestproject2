@@ -13,9 +13,7 @@ import ua.javatests.adressbookweb.model.Contacts;
 import ua.javatests.adressbookweb.model.UserData;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends BaseHelper {
 
@@ -140,7 +138,7 @@ public class ContactHelper extends BaseHelper {
 
     public void returnHomePage() {
         wd.findElement(By.linkText("home page")).click();
-        }
+    }
 
     public List<UserData> list() {
         List<UserData> list = new ArrayList<>();
@@ -176,4 +174,10 @@ public class ContactHelper extends BaseHelper {
         }
         return new Contacts(contactsCache);
     }
+
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
+
 }
