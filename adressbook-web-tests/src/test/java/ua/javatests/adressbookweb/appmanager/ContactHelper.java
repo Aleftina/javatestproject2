@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import ua.javatests.adressbookweb.model.Contacts;
 import ua.javatests.adressbookweb.model.UserData;
 
 import java.util.ArrayList;
@@ -152,8 +153,8 @@ public class ContactHelper extends BaseHelper {
         return list;
     }
 
-    public Set<UserData> all() {
-        Set<UserData> contacts = new HashSet<>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
 
         for (int j = 0; j < elements.size(); j++) {
