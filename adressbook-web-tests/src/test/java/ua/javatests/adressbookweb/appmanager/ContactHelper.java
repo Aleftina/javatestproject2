@@ -75,18 +75,21 @@ public class ContactHelper extends BaseHelper {
         selectUserById(i);
         submitDelete();
         alertAcceptDelete();
+        contactsCache = null;
     }
 
     public void delete(UserData user) {
         select(user);
         submitDelete();
         alertAcceptDelete();
+        contactsCache = null;
     }
 
     public void modify(UserData userData) {
         select(userData);
         edit(userData);
         fillUserParameters(userData, false);
+        contactsCache = null;
         submitUserUpdate();
     }
 
@@ -94,6 +97,7 @@ public class ContactHelper extends BaseHelper {
         addNewUserLink();
         fillUserParameters(userData, true);
         submitNewUser();
+        contactsCache = null;
         returnHomePage();
     }
 
@@ -153,8 +157,13 @@ public class ContactHelper extends BaseHelper {
         return list;
     }
 
+    private Contacts contactsCache = null;
+
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactsCache != null) {
+            return new Contacts(contactsCache);
+        }
+        contactsCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
 
         for (int j = 0; j < elements.size(); j++) {
@@ -163,8 +172,8 @@ public class ContactHelper extends BaseHelper {
             String name = String.valueOf(wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + i + "]/td[3]")).getText());
             int id = Integer.parseInt(elements.get(j).findElement(By.tagName("input")).getAttribute("id"));
 
-            contacts.add(new UserData().withId(id).withLastName(lastName).withName(name));
+            contactsCache.add(new UserData().withId(id).withLastName(lastName).withName(name));
         }
-        return contacts;
+        return new Contacts(contactsCache);
     }
 }
