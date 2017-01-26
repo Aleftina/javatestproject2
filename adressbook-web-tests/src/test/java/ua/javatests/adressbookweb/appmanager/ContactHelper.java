@@ -89,6 +89,13 @@ public class ContactHelper extends BaseHelper {
         submitUserUpdate();
     }
 
+    public void create(UserData userData) {
+        addNewUserLink();
+        fillUserParameters(userData, true);
+        submitNewUser();
+        returnHomePage();
+    }
+
     public Boolean userListIsEmpty() {
         //if (! isElementPresent(By.name("#maintable tr[2]"))) {
         if (!isElementPresent(By.xpath(".//*[@id='maintable']/tbody/tr[2]"))) {
@@ -126,17 +133,9 @@ public class ContactHelper extends BaseHelper {
         }
     }
 
-
-    public void create(UserData userData) {
-        addNewUserLink();
-        fillUserParameters(userData, true);
-        submitNewUser();
-        returnHomePage();
-    }
-
     public void returnHomePage() {
         wd.findElement(By.linkText("home page")).click();
-    }
+        }
 
     public List<UserData> list() {
         List<UserData> list = new ArrayList<>();
@@ -168,5 +167,3 @@ public class ContactHelper extends BaseHelper {
         return contacts;
     }
 }
-
-

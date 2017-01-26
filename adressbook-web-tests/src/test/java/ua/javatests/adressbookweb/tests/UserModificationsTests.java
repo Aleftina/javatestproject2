@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.GroupData;
 import ua.javatests.adressbookweb.model.UserData;
 
-import java.util.List;
 import java.util.Set;
 
 
@@ -24,7 +23,7 @@ public class UserModificationsTests extends BaseTest {
         applic.goTo().homePage();
     }
 
-    @Test
+    @Test(enabled = false)
     public void testUserInfoUpdate() {
 
         Set<UserData> beforeList = applic.contact().all();
@@ -34,7 +33,6 @@ public class UserModificationsTests extends BaseTest {
                 .withMobile("0987654321").withEmail("zxcv@klkl.opop");
 
         applic.contact().modify(user);
-
         applic.goTo().homePage();
         //check lists and their sizes
         Set<UserData> afterList = applic.contact().all();

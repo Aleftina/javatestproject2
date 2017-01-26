@@ -1,11 +1,12 @@
 package ua.javatests.adressbookweb.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.GroupData;
 
 import java.util.Set;
+
+import static org.testng.Assert.assertEquals;
 
 
 public class GroupModificationsTests extends BaseTest {
@@ -28,11 +29,11 @@ public class GroupModificationsTests extends BaseTest {
         applic.group().modify(group);
 
         Set<GroupData> listAfter = applic.group().all();
-        Assert.assertEquals(listBefore.size(), listAfter.size());
+        assertEquals(listBefore.size(), listAfter.size());
 
         listBefore.remove(modifiedGroup);
         listBefore.add(group);
+        assertEquals(listBefore, listAfter);
 
-        Assert.assertEquals(listBefore, listAfter);
     }
 }

@@ -21,11 +21,11 @@ public class UserCreationTests extends BaseTest {
     @Test
     public void testUserCreation() {
         Set<UserData> listBefore = applic.contact().all();
+
         UserData user = new UserData().withLastName("Pupkin")
                 .withName("Vasya").withMobile("123254485").withEmail("asda@sadfsdl.ghj").withGroup("group 1");
 
         applic.contact().create(user);
-
         Set<UserData> listAfter = applic.contact().all();
         Assert.assertEquals(listBefore.size() + 1, listAfter.size());
 
@@ -36,9 +36,10 @@ public class UserCreationTests extends BaseTest {
     }
 
 
-    @Test    //(enabled=false)
+
+    @Test (enabled=false)
     public void loopCreation() {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 100; i++) {
             testUserCreation();
         }
     }

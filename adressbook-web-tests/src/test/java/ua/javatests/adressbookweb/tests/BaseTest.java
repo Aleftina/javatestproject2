@@ -7,7 +7,7 @@ import ua.javatests.adressbookweb.appmanager.ApplicationManager;
 
 public class BaseTest {
 
-    protected static final ApplicationManager applic = new ApplicationManager(BrowserType.CHROME);
+    protected static final ApplicationManager applic = new ApplicationManager(BrowserType.FIREFOX);
 
     @BeforeSuite
     public void setUp() throws Exception {

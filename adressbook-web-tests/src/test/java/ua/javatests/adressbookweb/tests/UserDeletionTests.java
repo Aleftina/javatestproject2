@@ -1,13 +1,14 @@
 package ua.javatests.adressbookweb.tests;
 
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.GroupData;
 import ua.javatests.adressbookweb.model.UserData;
 
 import java.util.Set;
+
+import static org.testng.Assert.assertEquals;
 
 
 public class UserDeletionTests extends BaseTest {
@@ -33,11 +34,12 @@ public class UserDeletionTests extends BaseTest {
         applic.goTo().homePage();
         //check lists and their sizes
         Set<UserData> listAfter = applic.contact().all();
-        Assert.assertEquals(listBefore.size(), listAfter.size() + 1);
+        assertEquals(listBefore.size(), listAfter.size() + 1);
 
-       // listBefore.remove(deletedUser);
+        //listBefore.remove(deletedUser);
         listAfter.add(deletedUser);
-        Assert.assertEquals(listBefore, listAfter);
+        assertEquals(listBefore, listAfter);
+
     }
 
     @Test
