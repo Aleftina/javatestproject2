@@ -1,13 +1,10 @@
 package ua.javatests.adressbookweb.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.javatests.adressbookweb.model.Contacts;
 import ua.javatests.adressbookweb.model.GroupData;
 import ua.javatests.adressbookweb.model.UserData;
-
-import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -23,7 +20,7 @@ public class UserModificationsTests extends BaseTest {
         //prepare contact, if empty
         applic.goTo().homePage();
         applic.contact().prepareUserList(new UserData().withLastName("last name").withName("name")
-                .withMobile("98765432").withEmail("sadasd@fsd.fsd").withGroup("group 1"));
+                .withMobilePhone("98765432").withEmail("sadasd@fsd.fsd").withGroup("group 1"));
         applic.goTo().homePage();
     }
 
@@ -34,7 +31,7 @@ public class UserModificationsTests extends BaseTest {
         UserData modifiedUser = beforeList.iterator().next();
         UserData user = new UserData().withId(modifiedUser.getId())
                 .withLastName("Petrov modified").withName("Oleg modified")
-                .withMobile("0987654321").withEmail("zxcv@klkl.opop");
+                .withMobilePhone("0987654321").withEmail("zxcv@klkl.opop");
 
         applic.contact().modify(user);
         applic.goTo().homePage();
