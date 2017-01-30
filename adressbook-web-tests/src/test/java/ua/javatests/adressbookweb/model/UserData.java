@@ -7,9 +7,19 @@ public class UserData {
     private String homePhone;
     private String mobilePhone;
     private String workPhone;
+    private String allPhones;
     private String email;
     private String group;
 
+    public String getAllPhones() {
+        System.out.println("getall Phones = "+allPhones);
+        return allPhones;
+    }
+
+    public UserData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
 
     public int getId() {
         return id;
@@ -119,4 +129,5 @@ public class UserData {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
+
 }

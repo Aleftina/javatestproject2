@@ -86,7 +86,6 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void modify(UserData userData) {
-        //select(userData);
         edit(userData);
         fillUserParameters(userData, false);
         contactsCache = null;
@@ -173,23 +172,10 @@ public class ContactHelper extends BaseHelper {
           String name = cells.get(2).getText();
          // String address = cells.get(3).getText();
           String email = cells.get(4).getText();
-          String[] phones =  cells.get(5).getText().split("\n");
-          System.out.println("length = "+phones.length);
-//          for (String str : phones) {
-//              System.out.println("phone = " + str); //+" "+phones[1]+" "+phones[2]+" ");
-//          }
-          //-----old implement-n, by x-path
-          //for (int j = 0; j < rows.size(); j++) {
-            //int i = j + 2;
-            //String lastName = String.valueOf(wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + i + "]/td[2]")).getText());
-            //String name = String.valueOf(wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[" + i + "]/td[3]")).getText());
-            //int id = Integer.parseInt(rows.get(j).findElement(By.tagName("input")).getAttribute("id"));
-            //String allPhones = elements.get(j)
-          //-------------
+          String allPhones =  cells.get(5).getText();
+          System.out.println("all phones = "+allPhones);
             contactsCache.add(new UserData().withId(id).withLastName(lastName).withName(name).withEmail(email)
-                    .withHomePhone(phones[0])
-                    .withMobilePhone(phones[1])
-                    .withWorkPhone(phones[2]));
+                    .withAllPhones(allPhones));
         }
         return new Contacts(contactsCache);
     }
