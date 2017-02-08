@@ -11,9 +11,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ua.javatests.adressbookweb.model.Contacts;
 import ua.javatests.adressbookweb.model.UserData;
+import ua.javatests.adressbookweb.tests.ContactDetailsTests;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ContactHelper extends BaseHelper {
 
@@ -68,7 +71,12 @@ public class ContactHelper extends BaseHelper {
     public void edit(UserData user) {
         int i = user.getId();
         //wd.findElement(By.cssSelector("a[href*='edit.php?id=" + i + "']")).click();
-        wd.findElement(By.cssSelector(String.format("a[href*='edit.php?id=%s']",i))).click();
+        wd.findElement(By.cssSelector(String.format("a[href*='edit.php?id=%s']", i))).click();
+    }
+
+    public void userDetails(UserData user) {
+        int id = user.getId();
+        wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click();
     }
 
     public void deleteById(int i) {
@@ -165,17 +173,16 @@ public class ContactHelper extends BaseHelper {
         contactsCache = new Contacts();
         List<WebElement> rows = wd.findElements(By.name("entry"));
 
-      for (WebElement row : rows) {
-          List<WebElement> cells = row.findElements(By.tagName("td"));
-          int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("id"));
-          String lastName = cells.get(1).getText();
-          String name = cells.get(2).getText();
-         // String address = cells.get(3).getText();
-          String email = cells.get(4).getText();
-          String allPhones =  cells.get(5).getText();
-          System.out.println("all phones = "+allPhones);
-            contactsCache.add(new UserData().withId(id).withLastName(lastName).withName(name).withEmail(email)
-                    .withAllPhones(allPhones));
+        for (WebElement row : rows) {
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("id"));
+            String lastName = cells.get(1).getText();
+            String name = cells.get(2).getText();
+            String address = cells.get(3).getText();
+            String email = cells.get(4).getText();
+            String allPhones = cells.get(5).getText();
+            contactsCache.add(new UserData().withId(id).withLastName(lastName).withName(name)
+                    .withAddress(address).withAllPhones(allPhones).withEmail(email));
         }
         return new Contacts(contactsCache);
     }
@@ -190,6 +197,7 @@ public class ContactHelper extends BaseHelper {
 
         String name = wd.findElement(By.name("firstname")).getAttribute("value");
         String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
         String work = wd.findElement(By.name("work")).getAttribute("value");
@@ -197,5 +205,11 @@ public class ContactHelper extends BaseHelper {
         wd.navigate().back();
         return new UserData().withId(contact.getId()).withLastName(lastname)
                 .withName(name).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withEmail(email);
+    }
+
+    public String detailsText(UserData contact) {
+        userDetails(contact);
+        String detailsText = wd.findElement(By.cssSelector("div[id='content']")).getText();
+        return detailsText;
     }
 }
