@@ -26,7 +26,7 @@ public class UserCreationTests extends BaseTest {
         Contacts listBefore = applic.contact().all();
 
         UserData user = new UserData().withLastName("Pupkin")
-                .withName("Vasya").withMobile("123254485").withEmail("asda@sadfsdl.ghj").withGroup("group 1");
+                .withName("Vasya").withMobilePhone("123254485").withEmail("asda@sadfsdl.ghj").withGroup("group 1");
 
         applic.contact().create(user);
         assertThat(listBefore.size() + 1, equalTo(applic.contact().count()));

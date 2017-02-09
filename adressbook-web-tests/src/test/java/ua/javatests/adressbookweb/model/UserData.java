@@ -4,15 +4,43 @@ public class UserData {
     private int id = Integer.MAX_VALUE;
     private String lastName;
     private String name;
+    private String address;
     private String homePhone;
     private String mobilePhone;
     private String workPhone;
+    private String allPhones;
     private String email;
     private String group;
 
-
+    public String getAllPhones() {
+        return allPhones;
+    }
     public int getId() {
         return id;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public String getHomePhone() {
+        return homePhone;
+    }
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+    public String getWorkPhone() {
+        return workPhone;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getGroup() {
+        return group;
     }
 
     public UserData withId(int id) {
@@ -30,10 +58,10 @@ public class UserData {
         return this;
     }
 
-//    public UserData withAddress(String address) {
-//        this.address = address;
-//        return this;
-//    }
+    public UserData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
 
     public UserData withHomePhone(String homePhone) {
         this.homePhone = homePhone;
@@ -60,34 +88,9 @@ public class UserData {
         return this;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getHomePhone() {
-        return homePhone;
-    }
-    public String getMobilePhone() {
-        return mobilePhone;
-    }
-    public String getWorkPhone() {
-        return workPhone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getGroup() {
-        return group;
-    }
-
-    public void setGroup(String group) {
-        this.group = group;
+    public UserData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
     }
 
     @Override
@@ -109,7 +112,6 @@ public class UserData {
         if (id != userData.id) return false;
         if (lastName != null ? !lastName.equals(userData.lastName) : userData.lastName != null) return false;
         return name != null ? name.equals(userData.name) : userData.name == null;
-
     }
 
     @Override
@@ -119,4 +121,14 @@ public class UserData {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
+    public String getContactDetails() {
+//        String s = (getLastName()+getName()+getAddress()+getAllPhones()+getEmail())
+//                .replaceAll(" ", "").replaceAll("\n","");
+        //считать весь текст из окна детейлс, потом удалить пробелы и H:  M: W:
+
+        return null;
+        //
+    }
+
+
 }

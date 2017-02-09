@@ -23,7 +23,7 @@ public class UserModificationsTests extends BaseTest {
         //prepare contact, if empty
         applic.goTo().homePage();
         applic.contact().prepareUserList(new UserData().withLastName("last name").withName("name")
-                .withMobile("98765432").withEmail("sadasd@fsd.fsd").withGroup("group 1"));
+                .withMobilePhone("98765432").withEmail("sadasd@fsd.fsd").withGroup("group 1"));
         applic.goTo().homePage();
     }
 
@@ -34,7 +34,7 @@ public class UserModificationsTests extends BaseTest {
         UserData modifiedUser = beforeList.iterator().next();
         UserData user = new UserData().withId(modifiedUser.getId())
                 .withLastName("Petrov modified").withName("Oleg modified")
-                .withMobile("0987654321").withEmail("zxcv@klkl.opop");
+                .withMobilePhone("0987654321").withEmail("zxcv@klkl.opop");
 
         applic.contact().modify(user);
         applic.goTo().homePage();

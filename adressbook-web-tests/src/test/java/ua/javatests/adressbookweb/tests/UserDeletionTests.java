@@ -24,7 +24,7 @@ public class UserDeletionTests extends BaseTest {
 
         applic.goTo().homePage();
         applic.contact().prepareUserList(new UserData().withLastName("lastname")
-                .withName("name").withMobile("97654321").withEmail("asd@dfg").withGroup("group 1"));
+                .withName("name").withMobilePhone("97654321").withEmail("asd@dfg").withGroup("group 1"));
         applic.goTo().homePage();
     }
 

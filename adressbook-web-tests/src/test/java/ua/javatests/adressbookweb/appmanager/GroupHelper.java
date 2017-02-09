@@ -34,7 +34,8 @@ public class GroupHelper extends BaseHelper {
     }
 
         public void prepareGroupList(GroupData groupData) {
-        if (groupsListExist() == false) {
+        //if (groupsListExist() == false)
+        {
             create(groupData);
         }
     }
