@@ -6,6 +6,8 @@ import ua.javatests.adressbookweb.model.Contacts;
 import ua.javatests.adressbookweb.model.GroupData;
 import ua.javatests.adressbookweb.model.UserData;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -21,9 +23,10 @@ public class UserCreationTests extends BaseTest {
     @Test
     public void testUserCreation() {
         Contacts listBefore = applic.contact().all();
+        File photo = new File("src/test/resources/panda.jpg");
 
-        UserData user = new UserData().withLastName("Pupkin")
-                .withName("Vasya").withMobilePhone("123254485").withEmail("asda@sadfsdl.ghj").withGroup("group 1");
+        UserData user = new UserData().withLastName("Pupkin").withName("Vasya")
+                .withMobilePhone("123254485").withEmail("asda@sadfsdl.ghj").withPhoto(photo).withGroup("group 1");
 
         applic.contact().create(user);
         assertThat(listBefore.size() + 1, equalTo(applic.contact().count()));
@@ -34,6 +37,14 @@ public class UserCreationTests extends BaseTest {
                 .withId(listAfter.stream().mapToInt((usr) -> usr.getId()).max().getAsInt())), equalTo(listAfter));
     }
 
+    @Test  // (enabled=false)
+    public void testCurrentDir(){
+        File currentDir = new File("src/test/resources/panda.jpg");
+        File photo = new File("src/test/resources/panda.jpg");
+        System.out.println(" current path = "+ currentDir.getAbsolutePath());
+        System.out.println(" photo exist = "+photo.exists());
+        // atestproject3/javatestproject2/adressbook-web-tests/src/test/resources/panda.jpg
+    }
     @Test (enabled=false)
     public void loopCreation() {
         for (int i = 0; i < 100; i++) {

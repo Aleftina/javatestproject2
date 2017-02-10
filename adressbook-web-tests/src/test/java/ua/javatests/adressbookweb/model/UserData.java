@@ -1,5 +1,7 @@
 package ua.javatests.adressbookweb.model;
 
+import java.io.File;
+
 public class UserData {
     private int id = Integer.MAX_VALUE;
     private String lastName;
@@ -11,6 +13,17 @@ public class UserData {
     private String allPhones;
     private String email;
     private String group;
+
+    public File getPhoto() {
+        return photo;
+    }
+
+    public UserData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    private File photo;
 
     public String getAllPhones() {
         return allPhones;

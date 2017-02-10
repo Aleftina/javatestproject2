@@ -1,6 +1,11 @@
 package ua.javatests.adressbookweb.appmanager;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+
+import java.io.File;
 
 public class BaseHelper {
 
@@ -24,6 +29,12 @@ public class BaseHelper {
             }
         }
     }
+    public void attach(By locator, File file) {
+      //  click(locator);
+        if (file != null) {
+                wd.findElement(locator).sendKeys(file.getAbsolutePath());
+            }
+        }
 
     public boolean isAlertPresent() {
         try {
