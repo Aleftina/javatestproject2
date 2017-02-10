@@ -8,9 +8,7 @@ import ua.javatests.adressbookweb.model.GroupData;
 import ua.javatests.adressbookweb.model.Groups;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class GroupHelper extends BaseHelper {
@@ -34,7 +32,8 @@ public class GroupHelper extends BaseHelper {
     }
 
         public void prepareGroupList(GroupData groupData) {
-        if (groupsListExist() == false) {
+        //if (groupsListExist() == false)
+        {
             create(groupData);
         }
     }

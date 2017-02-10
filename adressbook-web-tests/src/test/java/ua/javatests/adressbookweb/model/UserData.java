@@ -15,30 +15,39 @@ public class UserData {
     public String getAllPhones() {
         return allPhones;
     }
+
     public int getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public String getLastName() {
         return lastName;
     }
+
     public String getAddress() {
         return address;
     }
+
     public String getHomePhone() {
         return homePhone;
     }
+
     public String getMobilePhone() {
         return mobilePhone;
     }
+
     public String getWorkPhone() {
         return workPhone;
     }
+
     public String getEmail() {
         return email;
     }
+
     public String getGroup() {
         return group;
     }
@@ -121,14 +130,5 @@ public class UserData {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
-    public String getContactDetails() {
-//        String s = (getLastName()+getName()+getAddress()+getAllPhones()+getEmail())
-//                .replaceAll(" ", "").replaceAll("\n","");
-        //считать весь текст из окна детейлс, потом удалить пробелы и H:  M: W:
-
-        return null;
-        //
-    }
-
 
 }

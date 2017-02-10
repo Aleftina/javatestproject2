@@ -11,12 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ua.javatests.adressbookweb.model.Contacts;
 import ua.javatests.adressbookweb.model.UserData;
-import ua.javatests.adressbookweb.tests.ContactDetailsTests;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ContactHelper extends BaseHelper {
 

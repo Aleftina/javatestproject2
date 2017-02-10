@@ -16,7 +16,7 @@ public class BaseTest {
 
     @AfterSuite
     public void tearDown() {
-        applic.stopDriver();
+      //  applic.stopDriver();
     }
 
 }

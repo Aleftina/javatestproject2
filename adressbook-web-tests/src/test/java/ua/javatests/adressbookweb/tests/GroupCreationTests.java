@@ -40,7 +40,7 @@ public class GroupCreationTests extends BaseTest {
     }
 
 
-    @Test  //(enabled = false)
+    @Test (enabled = false)
     public void loopGroupCreation() {
         for (int i = 0; i < 3; i++) {
             testGroupCreation();
