@@ -25,7 +25,6 @@ public class ContactHelper extends BaseHelper {
     public void fillUserParameters(UserData userData, Boolean creation) {
         type(By.name("firstname"), userData.getName());
         type(By.name("lastname"), userData.getLastName());
-        attach(By.name("photo"), userData.getPhoto());
         type(By.name("mobile"), userData.getMobilePhone());
         type(By.name("email"), userData.getEmail());
         if (creation) {
